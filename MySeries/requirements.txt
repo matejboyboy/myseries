@@ -1,0 +1,6 @@
+Flask
+gunicorn
+psycopg2-binary
+Werkzeug
+
+pip freeze > requirements.txt
