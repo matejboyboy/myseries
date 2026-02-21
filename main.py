@@ -77,7 +77,7 @@ def home():
     cur.close()
     conn.close()
 
-    return render_template("home.html", hot_series=hot_series, newest_series=newest_series,
+    return render_template("HomePage.html", hot_series=hot_series, newest_series=newest_series,
                            romance_series=romance_series, action_series=action_series, drama_series=drama_series)
 # -------------------------------------------------
 # ALL SERIES
