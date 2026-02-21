@@ -32,7 +32,7 @@ def home():
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     cur.execute("""
-        SELECT id, Name, Episodes, Genre, Duration, image
+        SELECT id, name, episodes, genre, duration, image
         FROM series
         ORDER BY RANDOM()
         LIMIT 6
@@ -40,35 +40,35 @@ def home():
     hot_series = cur.fetchall()
 
     cur.execute("""
-        SELECT id, Name, image
+        SELECT id, name, image
         FROM series
-        ORDER BY Aired DESC
+        ORDER BY aired DESC
         LIMIT 20
     """)
     newest_series = cur.fetchall()
 
     cur.execute("""
-        SELECT id, Name, image
+        SELECT id, name, image
         FROM series
-        WHERE Genre ILIKE '%Romance%'
+        WHERE genre ILIKE '%Romance%'
         ORDER BY RANDOM()
         LIMIT 20
     """)
     romance_series = cur.fetchall()
 
     cur.execute("""
-        SELECT id, Name, image
+        SELECT id, name, image
         FROM series
-        WHERE Genre ILIKE '%Action%'
+        WHERE genre ILIKE '%Action%'
         ORDER BY RANDOM()
         LIMIT 20
     """)
     action_series = cur.fetchall()
 
     cur.execute("""
-        SELECT id, Name, image
+        SELECT id, name, image
         FROM series
-        WHERE Genre ILIKE '%Drama%'
+        WHERE genre ILIKE '%Drama%'
         ORDER BY RANDOM()
         LIMIT 20
     """)
@@ -88,10 +88,10 @@ def series():
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     cur.execute("""
-        SELECT id, Name, Episodes, Genre, Aired, EndedAiring,
-               Source, Duration, Rating, image
+        SELECT id, name, episodes, genre, aired, endedairing,
+               source, duration, rating, image
         FROM series
-        ORDER BY Name
+        ORDER BY name
     """)
     all_series = cur.fetchall()
 
@@ -128,7 +128,7 @@ def series_info(series_id):
         conn.close()
         return "Series not found", 404
 
-    safe_name = series['Name'].replace(" ", "").lower()
+    safe_name = series['name'].replace(" ", "").lower()
     summary_file = os.path.join(app.root_path, 'static', 'SUMMARIES', f"{safe_name}.txt")
 
     series['Summary'] = "Summary not available."
@@ -163,7 +163,7 @@ def series_info_by_name(series_name):
     conn = get_db()
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-    cur.execute("SELECT * FROM series WHERE Name ILIKE %s", (series_name,))
+    cur.execute("SELECT * FROM series WHERE name ILIKE %s", (series_name,))
     series = cur.fetchone()
 
     cur.close()
@@ -172,7 +172,7 @@ def series_info_by_name(series_name):
     if not series:
         return "Series not found.", 404
 
-    safe_name = series['Name'].replace(" ", "").lower()
+    safe_name = series['name'].replace(" ", "").lower()
     summary_file = os.path.join(app.root_path, 'static', 'SUMMARIES', f"{safe_name}.txt")
 
     summary = "Summary not available."
@@ -443,9 +443,9 @@ def my_series():
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     cur.execute("""
-        SELECT s.id, s.Name, s.Episodes, s.Genre, s.Aired,
-               s.EndedAiring, s.Source, s.Duration,
-               s.Rating, s.image,
+        SELECT s.id, s.name, s.episodes, s.genre, s.aired,
+               s.endedairing, s.source, s.duration,
+               s.rating, s.image,
                us.rating AS user_score
         FROM user_series us
         JOIN series s ON s.id = us.series_id

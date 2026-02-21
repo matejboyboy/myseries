@@ -171,12 +171,12 @@
 
         {% for s in user_series %}
         <a href="{{ url_for('series_info', series_id=s.id) }}" class="series-link">
-            <div class="series-row" data-name="{{ s.Name | lower }}" data-rating="{{ s.Rating | lower }}"
-                data-genre="{{ s.Genre | lower }}" data-source="{{ s.Source | lower }}"
+            <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating | lower }}"
+                data-genre="{{ s.genre | lower }}" data-source="{{ s.source | lower }}"
                 data-user-score="{{ s.user_score }}">
 
                 <div class="series-image">
-                    <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}" alt="{{ s.Name }}">
+                    <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}" alt="{{ s.name }}">
                 </div>
 
                 <div class="series-info">

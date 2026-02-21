@@ -69,14 +69,14 @@
                         <div class="slide">
                             <a href="{{ url_for('series_info', series_id=s.id) }}">
                                 <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}"
-                                    alt="{{ s.Name }} Cover">
+                                    alt="{{ s.name }} Cover">
 
                                 <div class="slide-info">
-                                    <h3>{{ s.Name }}</h3>
+                                    <h3>{{ s.name }}</h3>
                                     <p>
-                                        {{ s.Episodes or "?" }} Episodes •
-                                        {{ s.Duration or "?" }} min •
-                                        {{ s.Genre or "Unknown" }}
+                                        {{ s.episodes or "?" }} Episodes •
+                                        {{ s.duration or "?" }} min •
+                                        {{ s.genre or "Unknown" }}
                                     </p>
                                 </div>
                             </a>
@@ -102,7 +102,7 @@
 
                 <div class="novi_relesi">
                     {% for s in newest_series %}
-                    <a href="{{ url_for('series_info', series_id=s.id) }}" class="pick-item" title="{{ s.Name }}">
+                    <a href="{{ url_for('series_info', series_id=s.id) }}" class="pick-item" title="{{ s.name }}">
                         <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}">
                     </a>
                     {% endfor %}
@@ -122,7 +122,7 @@
 
                 <div class="novi_relesi">
                     {% for s in romance_series %}
-                    <a href="{{ url_for('series_info', series_id=s.id) }}" class="pick-item" title="{{ s.Name }}">
+                    <a href="{{ url_for('series_info', series_id=s.id) }}" class="pick-item" title="{{ s.name }}">
                         <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}">
                     </a>
                     {% endfor %}
@@ -142,7 +142,7 @@
 
                 <div class="novi_relesi">
                     {% for s in action_series %}
-                    <a href="{{ url_for('series_info', series_id=s.id) }}" class="pick-item" title="{{ s.Name }}">
+                    <a href="{{ url_for('series_info', series_id=s.id) }}" class="pick-item" title="{{ s.name }}">
                         <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}">
                     </a>
                     {% endfor %}
@@ -162,7 +162,7 @@
 
                 <div class="novi_relesi">
                     {% for s in drama_series %}
-                    <a href="{{ url_for('series_info', series_id=s.id) }}" class="pick-item" title="{{ s.Name }}">
+                    <a href="{{ url_for('series_info', series_id=s.id) }}" class="pick-item" title="{{ s.name }}">
                         <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}">
                     </a>
                     {% endfor %}

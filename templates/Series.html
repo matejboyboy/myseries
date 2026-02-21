@@ -160,22 +160,22 @@
         </div>
         {% for s in series %}
         <a href="{{ url_for('series_info', series_id=s.id) }}" class="series-link">
-            <div class="series-row" data-name="{{ s.Name | lower }}" data-rating="{{ s.Rating | lower }}"
-                data-genre="{{ s.Genre | lower }}" data-source="{{ s.Source | lower }}">
+            <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating | lower }}"
+                data-genre="{{ s.genre | lower }}" data-source="{{ s.source | lower }}">
 
                 <!-- IMAGE -->
                 <div class="series-image">
-                    <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}" alt="{{ s.Name }}">
+                    <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}" alt="{{ s.name }}">
                 </div>
 
                 <!-- INFO -->
                 <div class="series-info">
-                    <h3 class="series-title" data-name="{{ s.Name | lower }}">{{ s.Name }}</h3>
-                    <p class="series-meta"><strong>Genre:</strong> {{ s.Genre }}</p>
-                    <p class="series-meta"><strong>Episodes:</strong> {{ s.Episodes }}</p>
-                    <p class="series-meta"><strong>Duration:</strong> {{ s.Duration }} min</p>
-                    <p class="series-meta"><strong>Rating:</strong> {{ s.Rating }}</p>
-                    <p class="series-meta"><strong>Aired:</strong> {{ s.Aired }} – {{ s['EndedAiring'] }}</p>
+                    <h3 class="series-title" data-name="{{ s.name | lower }}">{{ s.name }}</h3>
+                    <p class="series-meta"><strong>Genre:</strong> {{ s.genre }}</p>
+                    <p class="series-meta"><strong>Episodes:</strong> {{ s.episodes }}</p>
+                    <p class="series-meta"><strong>Duration:</strong> {{ s.duration }} min</p>
+                    <p class="series-meta"><strong>Rating:</strong> {{ s.rating }}</p>
+                    <p class="series-meta"><strong>Aired:</strong> {{ s.aired }} – {{ s.ended_airing }}</p>
                 </div>
             </div>
         </a>

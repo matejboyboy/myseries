@@ -72,11 +72,11 @@
 
             <!-- DETAILS -->
             <div class="series-info-details">
-                <h2>{{ series.Name }}</h2>
+                <h2>{{ series.name }}</h2>
 
                 <p><strong>Genre:</strong>
                     <span class="genres">
-                        {% for genre in series.Genre.split(',') %}
+                        {% for genre in series.genre.split(',') %}
                         <span class="genre-tag" data-genre="{{ genre.strip() }}">
                             {{ genre.strip() }}
                         </span>
@@ -84,11 +84,11 @@
                     </span>
                 </p>
 
-                <p><strong>Rating:</strong> {{ series.Rating }}</p>
-                <p><strong>Episodes:</strong> {{ series.Episodes }}</p>
-                <p><strong>Duration:</strong> {{ series.Duration }} min</p>
-                <p><strong>Source:</strong> {{ series.Source }}</p>
-                <p><strong>Aired:</strong> {{ series.Aired }}{% if series.EndedAiring %} – {{ series.EndedAiring }}{%
+                <p><strong>Rating:</strong> {{ series.rating }}</p>
+                <p><strong>Episodes:</strong> {{ series.episodes }}</p>
+                <p><strong>Duration:</strong> {{ series.duration }} min</p>
+                <p><strong>Source:</strong> {{ series.source }}</p>
+                <p><strong>Aired:</strong> {{ series.aired }}{% if series.ended_airing %} – {{ series.ended_airing }}{%
                     endif %}</p>
                 <hr style="margin:30px 0; opacity:0.2;">
 
