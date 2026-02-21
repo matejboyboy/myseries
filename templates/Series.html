@@ -154,14 +154,13 @@
                     <div data-value="comics">Comics</div>
                     <div data-value="webtoon">Webtoon</div>
                     <div data-value="web novel">Web Novel</div>
-                    </select>
                 </div>
             </div>
         </div>
         {% for s in series %}
         <a href="{{ url_for('series_info', series_id=s.id) }}" class="series-link">
-            <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating | lower }}"
-                data-genre="{{ s.genre | lower }}" data-source="{{ s.source | lower }}">
+            <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating}}"
+                data-genre="{{ s.genre | lower }}" data-source="{{ s.source}}">
 
                 <!-- IMAGE -->
                 <div class="series-image">
@@ -174,8 +173,8 @@
                     <p class="series-meta"><strong>Genre:</strong> {{ s.genre }}</p>
                     <p class="series-meta"><strong>Episodes:</strong> {{ s.episodes }}</p>
                     <p class="series-meta"><strong>Duration:</strong> {{ s.duration }} min</p>
-                    <p class="series-meta"><strong>Rating:</strong> {{ s.rating }}</p>
-                    <p class="series-meta"><strong>Aired:</strong> {{ s.aired }} – {{ s.endedairing }}</p>
+                    <p class="series-meta"><strong>Rating:</strong> {{ s.rating or 'N/A'  }}</p>
+                    <p class="series-meta"><strong>Aired:</strong> {{ s.aired }} – {{ s.endedairing or 'N/A'  }}</p>
                 </div>
             </div>
         </a>
