@@ -239,7 +239,6 @@ def login():
         """, (username,))
 
         user = cur.fetchone()
-
         cur.close()
         conn.close()
 
@@ -247,9 +246,10 @@ def login():
             flash("Invalid username or password", "error")
             return redirect(url_for("login"))
 
+        # Ensure safe defaults
         session["username"] = username
-        session["theme"] = user["color_theme"] or "light"
-        session["profile_pic"] = user["profile_pic"]
+        session["theme"] = user.get("color_theme") or "light"
+        session["profile_pic"] = user.get("profile_pic") or ""  # <-- set empty string if None
 
         flash("Logged in successfully!", "success")
         return redirect(url_for("profile"))
