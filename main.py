@@ -1,4 +1,4 @@
-from fileinput import filename
+# from fileinput import filename
 from flask import Flask, jsonify, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
@@ -18,7 +18,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-DATABASE_URL = os.environ.get("postgresql://root:JNTxfRuueqPwNLIlkNxCOLns3BNn1aVS@dpg-d6crtvkr85hc73behe00-a.frankfurt-postgres.render.com/myseries_npjp")
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_db():
     return psycopg2.connect(DATABASE_URL)
