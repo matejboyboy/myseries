@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
-<body class="homepage {{ current_theme }}-theme">
+<body class="homepage {{ current_theme | default('light') }}-theme">
 
     <header>
         <nav class="home_nav">
