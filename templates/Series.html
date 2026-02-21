@@ -172,8 +172,8 @@
                     <h3 class="series-title" data-name="{{ s.name | lower }}">{{ s.name }}</h3>
                     <p><strong>Genre:</strong>
                         <span class="genres">
-                            {% if series.genre %}
-                            {% for genre in series.genre.split(',') %}
+                            {% if s.genre %}
+                            {% for genre in s.genre.split(',') %}
                             <span class="genre-tag" data-genre="{{ genre.strip() }}">
                                 {{ genre.strip() }}
                             </span>
