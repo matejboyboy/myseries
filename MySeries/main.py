@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
 import os
 import psycopg2
+import psycopg2.extras
 
 
 app = Flask(__name__)
@@ -17,93 +18,84 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("postgresql://root:JNTxfRuueqPwNLIlkNxCOLns3BNn1aVS@dpg-d6crtvkr85hc73behe00-a.frankfurt-postgres.render.com/myseries_npjp")
 
-conn = psycopg2.connect(DATABASE_URL)
+def get_db():
+    return psycopg2.connect(DATABASE_URL)
 
 # -------------------------------------------------
 # HOME
 # -------------------------------------------------
 @app.route("/")
 def home():
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    conn = get_db()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-    # Hot series (unchanged)
-    cursor.execute("""
+    cur.execute("""
         SELECT id, Name, Episodes, Genre, Duration, image
         FROM series
-        ORDER BY RAND()
+        ORDER BY RANDOM()
         LIMIT 6
     """)
-    hot_series = cursor.fetchall()
+    hot_series = cur.fetchall()
 
-    # Newest series
-    cursor.execute("""
+    cur.execute("""
         SELECT id, Name, image
         FROM series
         ORDER BY Aired DESC
         LIMIT 20
     """)
-    newest_series = cursor.fetchall()
+    newest_series = cur.fetchall()
 
-    # Romance
-    cursor.execute("""
+    cur.execute("""
         SELECT id, Name, image
         FROM series
-        WHERE Genre LIKE '%Romance%'
-        ORDER BY RAND()
+        WHERE Genre ILIKE '%Romance%'
+        ORDER BY RANDOM()
         LIMIT 20
     """)
-    romance_series = cursor.fetchall()
+    romance_series = cur.fetchall()
 
-    # Action
-    cursor.execute("""
+    cur.execute("""
         SELECT id, Name, image
         FROM series
-        WHERE Genre LIKE '%Action%'
-        ORDER BY RAND()
+        WHERE Genre ILIKE '%Action%'
+        ORDER BY RANDOM()
         LIMIT 20
     """)
-    action_series = cursor.fetchall()
+    action_series = cur.fetchall()
 
-    # Drama
-    cursor.execute("""
+    cur.execute("""
         SELECT id, Name, image
         FROM series
-        WHERE Genre LIKE '%Drama%'
-        ORDER BY RAND()
+        WHERE Genre ILIKE '%Drama%'
+        ORDER BY RANDOM()
         LIMIT 20
     """)
-    drama_series = cursor.fetchall()
+    drama_series = cur.fetchall()
 
-    cursor.close()
+    cur.close()
+    conn.close()
 
-    return render_template(
-        "HomePage.html",
-        hot_series=hot_series,
-        newest_series=newest_series,
-        romance_series=romance_series,
-        action_series=action_series,
-        drama_series=drama_series
-    )
-
-
-
+    return render_template(...)
 # -------------------------------------------------
 # ALL SERIES
 # -------------------------------------------------
 @app.route("/series")
 def series():
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    conn = get_db()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-    cursor.execute("""
+    cur.execute("""
         SELECT id, Name, Episodes, Genre, Aired, EndedAiring,
                Source, Duration, Rating, image
         FROM series
         ORDER BY Name
     """)
-    all_series = cursor.fetchall()
-    cursor.close()
+    all_series = cur.fetchall()
+
+    cur.close()
+    conn.close()
 
     return render_template("series.html", series=all_series)
 
@@ -124,18 +116,20 @@ def about_us():
 # -------------------------------------------------
 @app.route("/series/<int:series_id>")
 def series_info(series_id):
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    
-    # Fetch series info
-    cursor.execute("SELECT * FROM series WHERE id=%s", (series_id,))
-    series = cursor.fetchone()
+    conn = get_db()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+    cur.execute("SELECT * FROM series WHERE id=%s", (series_id,))
+    series = cur.fetchone()
+
     if not series:
-        cursor.close()
+        cur.close()
+        conn.close()
         return "Series not found", 404
 
-    # Add summary
     safe_name = series['Name'].replace(" ", "").lower()
     summary_file = os.path.join(app.root_path, 'static', 'SUMMARIES', f"{safe_name}.txt")
+
     series['Summary'] = "Summary not available."
     if os.path.exists(summary_file):
         with open(summary_file, 'r', encoding='utf-8') as f:
@@ -143,16 +137,17 @@ def series_info(series_id):
 
     user_data = None
     if session.get('username'):
-        # Fetch user's rating for this series if it exists
-        cursor.execute("""
+        cur.execute("""
             SELECT rating 
             FROM user_series
             WHERE series_id = %s
             AND user_id = (SELECT id FROM user_info WHERE username=%s)
         """, (series_id, session['username']))
-        user_data = cursor.fetchone()  # Will be None if no rating exists
 
-    cursor.close()
+        user_data = cur.fetchone()
+
+    cur.close()
+    conn.close()
 
     return render_template("info.html", series=series, user_data=user_data)
 
@@ -164,17 +159,21 @@ def series_info(series_id):
 # -------------------------------------------------
 @app.route('/series_info/<series_name>')
 def series_info_by_name(series_name):
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("SELECT * FROM series WHERE Name LIKE %s", (series_name,))
-    series = cursor.fetchone()
-    cursor.close()
+    conn = get_db()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+    cur.execute("SELECT * FROM series WHERE Name ILIKE %s", (series_name,))
+    series = cur.fetchone()
+
+    cur.close()
+    conn.close()
 
     if not series:
         return "Series not found.", 404
 
-    # Normalize file name: remove spaces and make lowercase
     safe_name = series['Name'].replace(" ", "").lower()
     summary_file = os.path.join(app.root_path, 'static', 'SUMMARIES', f"{safe_name}.txt")
+
     summary = "Summary not available."
 
     if os.path.exists(summary_file):
@@ -185,6 +184,7 @@ def series_info_by_name(series_name):
             summary = f"Error reading summary: {str(e)}"
 
     series['Summary'] = summary
+
     return render_template('info.html', series=series)
 
 # USER AUTH
@@ -195,11 +195,13 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
 
-        cur = mysql.connection.cursor()
+        conn = get_db()
+        cur = conn.cursor()
 
-        # Check if user exists
         cur.execute("SELECT id FROM user_info WHERE username=%s", (username,))
         if cur.fetchone():
+            cur.close()
+            conn.close()
             flash("Username already exists", "error")
             return redirect(url_for("register"))
 
@@ -210,8 +212,9 @@ def register():
             VALUES (%s, %s, %s)
         """, (username, hashed_password, date.today()))
 
-        mysql.connection.commit()
+        conn.commit()
         cur.close()
+        conn.close()
 
         flash("Account created successfully!", "success")
         return redirect(url_for("login"))
@@ -225,14 +228,19 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        conn = get_db()
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
         cur.execute("""
             SELECT password, color_theme, profile_pic
             FROM user_info 
             WHERE username = %s
         """, (username,))
+
         user = cur.fetchone()
+
         cur.close()
+        conn.close()
 
         if not user or not check_password_hash(user["password"], password):
             flash("Invalid username or password", "error")
@@ -240,7 +248,7 @@ def login():
 
         session["username"] = username
         session["theme"] = user["color_theme"] or "light"
-        session["profile_pic"] = user["profile_pic"]  # ← ADD THIS
+        session["profile_pic"] = user["profile_pic"]
 
         flash("Logged in successfully!", "success")
         return redirect(url_for("profile"))
@@ -258,15 +266,18 @@ def set_theme():
     if new_theme not in ["light", "dark"]:
         return jsonify({"success": False})
 
-    cur = mysql.connection.cursor()
+    conn = get_db()
+    cur = conn.cursor()
+
     cur.execute("""
         UPDATE user_info 
         SET color_theme = %s
         WHERE username = %s
     """, (new_theme, session["username"]))
 
-    mysql.connection.commit()
+    conn.commit()
     cur.close()
+    conn.close()
 
     session["theme"] = new_theme
 
@@ -292,34 +303,34 @@ def profile():
     if "username" not in session:
         return redirect(url_for("login"))
 
-    # 1. Get all files from the profile_pic folder
-    # Assuming your path is static/profile_pic
     pic_folder = os.path.join(app.root_path, 'static', 'profile_pic')
-    
-    # Create folder if it doesn't exist so it doesn't crash
+
     if not os.path.exists(pic_folder):
         os.makedirs(pic_folder)
-        
+
     images = [f for f in os.listdir(pic_folder) if f.endswith(('.png', '.jpg', '.jpeg', '.gif'))]
 
-    # 2. Get the current join date (using your existing logic)
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("""
-    SELECT created_at, profile_pic
-    FROM user_info
-    WHERE username = %s
+    conn = get_db()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+    cur.execute("""
+        SELECT created_at, profile_pic
+        FROM user_info
+        WHERE username = %s
     """, (session["username"],))
 
-    user = cursor.fetchone()
-    cursor.close()
+    user = cur.fetchone()
+
+    cur.close()
+    conn.close()
 
     return render_template(
-    "profile.html",
-    username=session["username"],
-    join_date=user["created_at"],
-    profile_pic=user["profile_pic"],  # ✅ PASS THIS
-    images=images
-)
+        "profile.html",
+        username=session["username"],
+        join_date=user["created_at"],
+        profile_pic=user["profile_pic"],
+        images=images
+    )
 
 @app.route('/set_profile_picture', methods=['POST'])
 def set_profile_picture():
@@ -329,19 +340,23 @@ def set_profile_picture():
     data = request.get_json()
     new_pic = data.get('new_picture')
 
-    cur = mysql.connection.cursor()
+    conn = get_db()
+    cur = conn.cursor()
+
     cur.execute("""
         UPDATE user_info
         SET profile_pic = %s
         WHERE username = %s
     """, (new_pic, session["username"]))
 
-    mysql.connection.commit()
+    conn.commit()
     cur.close()
+    conn.close()
 
     session['profile_pic'] = new_pic
 
     return jsonify({'success': True, 'new_picture': new_pic})
+
 
 @app.route('/upload_profile_picture', methods=['POST'])
 def upload_profile_picture():
@@ -357,7 +372,6 @@ def upload_profile_picture():
         return jsonify({'success': False, 'error': 'No file selected'})
 
     if file and allowed_file(file.filename):
-
         import uuid
         ext = file.filename.rsplit('.', 1)[1].lower()
         filename = f"{uuid.uuid4()}.{ext}"
@@ -365,15 +379,17 @@ def upload_profile_picture():
         save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(save_path)
 
-        cur = mysql.connection.cursor()
+        conn = get_db()
+        cur = conn.cursor()
         cur.execute("""
             UPDATE user_info
             SET profile_pic = %s
             WHERE username = %s
         """, (filename, session["username"]))
 
-        mysql.connection.commit()
+        conn.commit()
         cur.close()
+        conn.close()
 
         session['profile_pic'] = filename
 
@@ -393,7 +409,9 @@ def add_to_list():
     rating = request.form.get("rating") or None
     next_page = request.form.get("next")
 
-    cur = mysql.connection.cursor()
+    conn = get_db()
+    cur = conn.cursor()
+
     cur.execute("""
         INSERT INTO user_series (user_id, series_id, rating)
         VALUES (
@@ -401,19 +419,17 @@ def add_to_list():
             %s,
             %s
         )
-        ON DUPLICATE KEY UPDATE rating=%s
-    """, (session["username"], series_id, rating, rating))
+        ON CONFLICT (user_id, series_id)
+        DO UPDATE SET rating = EXCLUDED.rating
+    """, (session["username"], series_id, rating))
 
-    mysql.connection.commit()
+    conn.commit()
     cur.close()
+    conn.close()
 
     flash("Saved to your list!", "success")
 
     return redirect(next_page or url_for("series_info", series_id=series_id))
-
-
-
-
 # -------------------------------------------------
 # MY SERIES
 # -------------------------------------------------
@@ -422,8 +438,10 @@ def my_series():
     if "username" not in session:
         return redirect(url_for("login"))
 
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("""
+    conn = get_db()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+    cur.execute("""
         SELECT s.id, s.Name, s.Episodes, s.Genre, s.Aired,
                s.EndedAiring, s.Source, s.Duration,
                s.Rating, s.image,
@@ -434,10 +452,12 @@ def my_series():
             SELECT id FROM user_info WHERE username=%s
         )
     """, (session["username"],))
-    user_series = cursor.fetchall()
-    cursor.close()
 
-    # Convert ratings to integers
+    user_series = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
     for s in user_series:
         if s["user_score"] is not None:
             s["user_score"] = int(s["user_score"])
@@ -447,4 +467,5 @@ def my_series():
 
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
