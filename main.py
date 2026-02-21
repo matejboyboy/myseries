@@ -305,11 +305,10 @@ def profile():
         return redirect(url_for("login"))
 
     pic_folder = os.path.join(app.root_path, 'static', 'profile_pic')
-
     if not os.path.exists(pic_folder):
         os.makedirs(pic_folder)
 
-    images = [f for f in os.listdir(pic_folder) if f.endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+    images = [f for f in os.listdir(pic_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
 
     conn = get_db()
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -321,15 +320,21 @@ def profile():
     """, (session["username"],))
 
     user = cur.fetchone()
-
     cur.close()
     conn.close()
+
+    if not user:  # fallback in case the user is missing
+        join_date = "Unknown"
+        profile_pic = None
+    else:
+        join_date = user.get("created_at", "Unknown")
+        profile_pic = user.get("profile_pic")
 
     return render_template(
         "profile.html",
         username=session["username"],
-        join_date=user["created_at"],
-        profile_pic=user["profile_pic"],
+        join_date=join_date,
+        profile_pic=profile_pic,
         images=images
     )
 
