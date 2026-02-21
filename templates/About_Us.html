@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>About Us</title>
+</head>
+
+<body class="homepage {{ current_theme }}-theme">
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <nav class="home_nav">
+            <!-- TOP ROW -->
+            <div class="nav_top_row">
+                <h1 class="home_naslov">MySeries</h1>
+
+                <div class="profile_section">
+                    {% if session.get('username') %}
+                    <div class="nav_user_container">
+                        <span class="nav_username">{{ session.username }}</span>
+
+                        <a href="/profile" class="nav-profile-bubble">
+
+                            {% if session.get('profile_pic') %}
+                            <img src="{{ url_for('static', filename='profile_pic/' + session.profile_pic) }}"
+                                class="nav-avatar">
+                            {% else %}
+                            {{ session.username[0] | upper }}
+                            {% endif %}
+
+                        </a>
+                    </div>
+                    {% else %}
+                    <a href="/login" class="nav-profile-bubble login-icon">?</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- BOTTOM ROW -->
+            <div class="nav_bottom_row">
+                <a href="/">Home</a>
+                <a href="/series">Series</a>
+
+                {% if session.get('username') %}
+                <a href="/my_series">My Series</a>
+                {% endif %}
+                <a href="/about_us">About us</a>
+
+                {% if not session.get('username') %}
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- ===== ABOUT US CONTENT ===== -->
+    <section class="about-us"
+        style="padding: 40px; color: white; font-family: Arial, Helvetica, sans-serif; max-width: 900px; margin: auto;">
+        <h2 class="home_podnaslov">About Us</h2>
+        <p>
+            Welcome to <strong>MySeries</strong> – your ultimate hub for discovering, tracking, and enjoying the latest
+            and greatest TV shows and anime.
+            We’re a small but passionate team of enthusiasts who believe that every series, from hidden gems to global
+            hits, deserves to be seen.
+        </p>
+        <p>
+            Our mission is simple: to make your series-watching experience seamless and fun. Whether you’re hunting for
+            the next binge-worthy anime or keeping up with popular dramas, we provide the tools and inspiration to
+            explore your favorites.
+        </p>
+        <p>
+            At MySeries, we value quality, passion, and community. We constantly update our database with new releases,
+            detailed series info, and high-quality cover images.
+            Our goal is to create a place where series lovers can find everything they need, all in one spot.
+        </p>
+        <p>
+            Thank you for being part of our journey. Sit back, explore, and let MySeries help you find your next
+            favorite show!
+        </p>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>Copyright &copy; MySeries 2024</p>
+    </footer>
+
+</body>
+
+</html>
