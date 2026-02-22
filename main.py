@@ -98,7 +98,7 @@ def series():
     cur.close()
     conn.close()
 
-    return render_template("series.html", series=all_series)
+    return render_template("Series.html", series=all_series)
 
 
 # -------------------------------------------------
@@ -106,7 +106,7 @@ def series():
 # -------------------------------------------------
 @app.route("/about_us")
 def about_us():
-    return render_template("About_US.html")
+    return render_template("About_Us.html")
 
 
 # -------------------------------------------------
