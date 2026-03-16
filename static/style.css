@@ -1027,30 +1027,36 @@ body {
 
 .select-options {
     position: absolute;
-    background: var(--ui-surface-3);
     top: calc(100% + 10px);
     left: 0;
-    right: 0;
+
+    min-width: 100%;
+    width: max-content; /* ⭐ allows horizontal growth */
 
     background: var(--ui-surface-3);
     border-radius: 1rem;
 
-    max-height: 0;
+    max-height: 350px;
+
     opacity: 0;
-    overflow-y: auto;
-    /* allows scrolling if many options */
     transform: translateY(-10px);
 
+    overflow-y: auto;
+    overflow-x: auto; /* ⭐ horizontal scroll if needed */
+
+    white-space: nowrap; /* ⭐ prevents line wrap */
+
     transition: all 0.35s ease;
+
     box-shadow: 0 25px 50px var(--shadow-strong);
 
     z-index: 10000;
-    /* ABOVE series hover */
 }
 
 .select-options div {
     padding: 14px 18px;
     transition: 0.25s ease;
+    white-space: nowrap; /* ⭐ keeps text in one line */
 }
 
 .select-options div:last-child {
@@ -1753,4 +1759,14 @@ body {
 
 .status-select .select-options div[data-value="on_hold"] {
     color: #f1c40f;
+}
+body {
+    overflow-x: auto;
+}
+.rating-select {
+    width: 160px;
+}
+
+.status-select {
+    width: 240px;
 }
