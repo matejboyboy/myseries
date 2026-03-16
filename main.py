@@ -139,11 +139,13 @@ def series_info(series_id):
     user_data = None
     if session.get('username'):
         cur.execute("""
-            SELECT rating 
+            SELECT rating, status
             FROM user_series
             WHERE series_id = %s
-            AND user_id = (SELECT id FROM user_info WHERE username=%s)
-        """, (series_id, session['username']))
+            AND user_id = (
+                SELECT id FROM user_info WHERE username=%s
+            )
+            """, (series_id, session['username']))
 
         user_data = cur.fetchone()
 
@@ -439,7 +441,7 @@ def add_to_list():
 
     flash("Saved to your list!", "success")
 
-    return redirect(next_page or url_for("series_info", series_id=series_id))
+    return redirect(url_for("series_info", series_id=series_id))
 # -------------------------------------------------
 # MY SERIES
 # -------------------------------------------------
