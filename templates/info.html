@@ -113,15 +113,6 @@
                         Your rating (1–10)
                     </label>
 
-                    <label>Status:</label>
-                    <select name="status">
-                        <option value="plan_to_watch">Plan to Watch</option>
-                        <option value="watching">Watching</option>
-                        <option value="completed">Completed</option>
-                        <option value="on_hold">On Hold</option>
-                        <option value="dropped">Dropped</option>
-                    </select>
-
                     <div class="custom-select rating-select">
                         <div class="select-selected">
                             {{ user_data.rating if user_data else "Your Rating" }}
@@ -152,35 +143,39 @@
                         </div>
 
                         <div class="select-options">
-                            <div data-value="plan_to_watch">Plan to Watch</div>
-                            <div data-value="watching">Watching</div>
-                            <div data-value="completed">Completed</div>
-                            <div data-value="on_hold">On Hold</div>
-                            <div data-value="dropped">Dropped</div>
+                            <div data-value="plan_to_watch">📌 Plan to Watch</div>
+                            <div data-value="watching">▶ Watching</div>
+                            <div data-value="completed">✔ Completed</div>
+                            <div data-value="on_hold">⏸ On Hold</div>
+                            <div data-value="dropped">✖ Dropped</div>
                         </div>
 
                         <input type="hidden" name="status"
                             value="{{ user_data.status if user_data and user_data.status else 'plan_to_watch' }}">
                     </div>
 
-                    <br>
-
-                    <button type="submit" class="primary-action-btn">
-                        Save to My List
-                    </button>
-
-                </form>
-
-                {% else %}
-
-                <p style="color:#ccc; margin-top:20px;">
-                    <a href="/login" style="color:#a0a0ff;">Log in</a>
-                    to rate and save this series
-                </p>
-
-                {% endif %}
-
+                    <input type="hidden" name="status"
+                        value="{{ user_data.status if user_data and user_data.status else 'plan_to_watch' }}">
             </div>
+
+            <br>
+
+            <button type="submit" class="primary-action-btn">
+                Save to My List
+            </button>
+
+            </form>
+
+            {% else %}
+
+            <p style="color:#ccc; margin-top:20px;">
+                <a href="/login" style="color:#a0a0ff;">Log in</a>
+                to rate and save this series
+            </p>
+
+            {% endif %}
+
+        </div>
 
         </div>
 
