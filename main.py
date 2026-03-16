@@ -440,6 +440,10 @@ def add_to_list():
     conn.close()
 
     flash("Saved to your list!", "success")
+    print("SERIES ID:", series_id)
+    print("RATING:", rating)
+    print("STATUS:", status)
+    print("USERNAME:", session["username"])
 
     return redirect(url_for("series_info", series_id=series_id))
 # -------------------------------------------------
