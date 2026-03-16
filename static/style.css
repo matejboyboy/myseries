@@ -1727,6 +1727,30 @@ body {
     scroll-behavior: smooth;
 }
 .status-select {
-    width: 180px;
-    margin: 10px 0;
+    width: 220px;
+    margin: 10px 0 20px 0;
+}
+
+/* Status options visual polish */
+.status-select .select-options div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Highlight current status */
+.status-select .select-options div[data-value="watching"] {
+    color: #4dabf7;
+}
+
+.status-select .select-options div[data-value="completed"] {
+    color: #2ecc71;
+}
+
+.status-select .select-options div[data-value="dropped"] {
+    color: #ff5a5a;
+}
+
+.status-select .select-options div[data-value="on_hold"] {
+    color: #f1c40f;
 }
