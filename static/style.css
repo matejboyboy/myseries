@@ -1726,3 +1726,7 @@ body {
 .novi_relesi {
     scroll-behavior: smooth;
 }
+.status-select {
+    width: 180px;
+    margin: 10px 0;
+}
