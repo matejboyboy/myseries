@@ -413,21 +413,25 @@ def add_to_list():
 
     series_id = request.form["series_id"]
     rating = request.form.get("rating") or None
+    status = request.form.get("status") or "plan_to_watch"
     next_page = request.form.get("next")
 
     conn = get_db()
     cur = conn.cursor()
 
     cur.execute("""
-        INSERT INTO user_series (user_id, series_id, rating)
+        INSERT INTO user_series (user_id, series_id, rating, status)
         VALUES (
             (SELECT id FROM user_info WHERE username=%s),
+            %s,
             %s,
             %s
         )
         ON CONFLICT (user_id, series_id)
-        DO UPDATE SET rating = EXCLUDED.rating
-    """, (session["username"], series_id, rating))
+        DO UPDATE SET
+            rating = EXCLUDED.rating,
+            status = EXCLUDED.status
+    """, (session["username"], series_id, rating, status))
 
     conn.commit()
     cur.close()
@@ -451,7 +455,8 @@ def my_series():
         SELECT s.id, s.name, s.episodes, s.genre, s.aired,
                s.endedairing, s.source, s.duration,
                s.rating, s.image,
-               us.rating AS user_score
+               us.rating AS user_score,
+               us.status
         FROM user_series us
         JOIN series s ON s.id = us.series_id
         WHERE us.user_id = (
