@@ -113,81 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const searchValue = searchInput ? normalize(searchInput.value) : "";
         const searchWords = searchValue.split(" ").filter(word => word !== "");
 
-        const ratingVal = ratingFilter ? (ratingFilter.dataset.value || "") : "";
-        const sourceVal = sourceFilter ? (sourceFilter.dataset.value || "") : "";
-        const userScoreVal = userScoreFilter ? (userScoreFilter.dataset.value || "") : "";
-        const sortVal = sortFilter ? (sortFilter.dataset.value || "default") : "default";
-        const statusVal = statusFilter ? (statusFilter.dataset.value || "") : "";
+        const ratingVal = ratingFilter?.dataset.value || "";
+        const sourceVal = sourceFilter?.dataset.value || "";
+        const userScoreVal = userScoreFilter?.dataset.value || "";
+        const sortVal = sortFilter?.dataset.value || "default";
+        const statusVal = statusFilter?.dataset.value || "";
 
-        let filteredRows = seriesRows.filter(row => {
-            const name = normalize(row.dataset.name);
-            const rating = normalize(row.dataset.rating);
-            const genre = normalize(row.dataset.genre);
-            const source = normalize(row.dataset.source);
-            const userScore = row.dataset.userScore || "";
-
-            const matchesSearch =
-                searchWords.length === 0 ||
-                searchWords.every(word => name.includes(word));
-
-            const matchesRating = ratingVal === "" || rating === ratingVal;
-
-            // ✅ STACKING GENRE LOGIC (AND)
-            const matchesGenre =
-                selectedGenres.length === 0 ||
-                selectedGenres.every(g => genre.includes(g));
-
-            const matchesSource = sourceVal === "" || source === sourceVal;
-
-            const matchesUserScore =
-                userScoreVal === "" || userScore === userScoreVal;
-
-            const status = row.dataset.status || "";
-
-            const matchesStatus =
-                statusVal === "" || status === statusVal;
-
-            return (
-                matchesSearch &&
-                matchesRating &&
-                matchesGenre &&
-                matchesSource &&
-                matchesUserScore &&
-                matchesStatus
-            );
-
-        });
-        document.querySelectorAll(".category-section").forEach(section => {
-
-            const visibleItems = section.querySelectorAll(".series-row:not([style*='none'])");
-
-            section.style.display = visibleItems.length ? "block" : "none";
-        });
-
-        // === SORTING ===
-        filteredRows.sort((a, b) => {
-            const aScore = parseFloat(a.dataset.userScore || 0);
-            const bScore = parseFloat(b.dataset.userScore || 0);
-
-            const aName = a.dataset.name.toLowerCase();
-            const bName = b.dataset.name.toLowerCase();
-
-            switch (sortVal) {
-                case "score-desc":
-                    return bScore - aScore;
-
-                case "score-asc":
-                    return aScore - bScore;
-
-                case "name-asc":
-                    return aName.localeCompare(bName);
-
-                default:
-                    return 0;
-            }
-        });
-
-        // === HIDE ALL ===
+        // === FILTER VISIBILITY ===
         seriesRows.forEach(row => {
 
             const name = normalize(row.dataset.name);
@@ -223,20 +155,48 @@ document.addEventListener("DOMContentLoaded", () => {
                 matchesUserScore &&
                 matchesStatus;
 
-            // ✅ Toggle visibility
             row.style.display = isVisible ? "flex" : "none";
 
             if (row.parentElement.classList.contains("series-link")) {
                 row.parentElement.style.display = isVisible ? "block" : "none";
             }
         });
-        // === SHOW FILTERED ===
-        filteredRows.forEach(row => {
-            row.style.display = "flex";
 
-            if (row.parentElement.classList.contains("series-link")) {
-                row.parentElement.style.display = "block";
-            }
+        // === SORT INSIDE EACH CATEGORY ===
+        document.querySelectorAll(".category-section").forEach(section => {
+
+            const items = Array.from(section.querySelectorAll(".series-link"));
+
+            items.sort((a, b) => {
+                const aRow = a.querySelector(".series-row");
+                const bRow = b.querySelector(".series-row");
+
+                const aScore = parseFloat(aRow.dataset.userScore || 0);
+                const bScore = parseFloat(bRow.dataset.userScore || 0);
+
+                const aName = aRow.dataset.name.toLowerCase();
+                const bName = bRow.dataset.name.toLowerCase();
+
+                switch (sortVal) {
+                    case "score-desc":
+                        return bScore - aScore;
+
+                    case "score-asc":
+                        return aScore - bScore;
+
+                    case "name-asc":
+                        return aName.localeCompare(bName);
+
+                    default:
+                        return 0;
+                }
+            });
+
+            items.forEach(item => section.appendChild(item));
+
+            // === HIDE EMPTY SECTIONS ===
+            const visible = section.querySelectorAll(".series-row:not([style*='none'])");
+            section.style.display = visible.length ? "block" : "none";
         });
     };
 
@@ -361,6 +321,11 @@ document.querySelectorAll(".wheel-scroll").forEach(container => {
             isScrolling = false;
         }
     }
+});
+document.querySelectorAll(".home_podnaslov").forEach(title => {
+    title.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
 });
 
 
