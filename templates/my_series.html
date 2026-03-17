@@ -187,55 +187,33 @@
         "dropped":"Dropped"
         } %}
 
-        {% for key,label in statuses.items() %}
+        {% for s in user_series %}
 
-        {% set filtered = user_series | selectattr("status","equalto",key) | list %}
+        <a href="{{ url_for('series_info', series_id=s.id) }}" class="series-link">
 
-        {% if filtered %}
+            <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating | lower }}"
+                data-genre="{{ s.genre | lower }}" data-source="{{ s.source | lower }}"
+                data-user-score="{{ s.user_score }}" data-status="{{ s.status }}">
 
-        <div class="category-section">
-
-            <h3 class="home_podnaslov">{{ label }}</h3>
-
-            {% for s in filtered %}
-
-            <a href="{{ url_for('series_info', series_id=s.id) }}" class="series-link">
-
-                <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating | lower }}"
-                    data-genre="{{ s.genre | lower }}" data-source="{{ s.source | lower }}"
-                    data-user-score="{{ s.user_score }}" data-status="{{ s.status }}">
-
-                    <div class="series-image">
-                        <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}" alt="{{ s.name }}">
-                    </div>
-
-                    <div class="series-info">
-
-                        <h3 class="series-title">{{ s.name }}</h3>
-
-                        <p class="series-meta"><strong>Genre:</strong> {{ s.genre }}</p>
-                        <p class="series-meta"><strong>Episodes:</strong> {{ s.episodes }}</p>
-                        <p class="series-meta"><strong>Duration:</strong> {{ s.duration }} min</p>
-                        <p class="series-meta"><strong>Rating:</strong> {{ s.rating }}</p>
-
-                        <div class="user-score">
-                            <span class="score-label">Your Score</span>
-                            <span class="score-value" data-score="{{ s.user_score }}">
-                                {{ s.user_score }}
-                            </span>
-                        </div>
-
-                    </div>
-
+                <div class="series-image">
+                    <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}">
                 </div>
 
-            </a>
+                <div class="series-info">
 
-            {% endfor %}
+                    <h3 class="series-title">{{ s.name }}</h3>
 
-        </div>
+                    <!-- ✅ ADD STATUS BADGE -->
+                    <span class="status-badge status-{{ s.status }}">
+                        {{ s.status.replace("_", " ") }}
+                    </span>
 
-        {% endif %}
+                    <p class="series-meta"><strong>Genre:</strong> {{ s.genre }}</p>
+                    <p class="series-meta"><strong>Rating:</strong> {{ s.rating }}</p>
+
+                </div>
+            </div>
+        </a>
 
         {% endfor %}
         {% else %}
