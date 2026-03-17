@@ -88,7 +88,17 @@
                     </span>
                 </p>
 
-                <p><strong>Rating:</strong> {{ series.rating or 'N/A'}}</p>
+                {% if user_data %}
+                <p>
+                    <strong>Your Rating:</strong>
+                    ⭐ {{ user_data.rating or 'Not rated' }}/10
+                </p>
+
+                <p>
+                    <strong>Your Status:</strong>
+                    {{ user_data.status.replace('_', ' ').title() }}
+                </p>
+                {% endif %}
                 <p><strong>Episodes:</strong> {{ series.episodes }}</p>
                 <p><strong>Duration:</strong> {{ series.duration }} min</p>
                 <p><strong>Source:</strong> {{ series.source or 'N/A'}}</p>
@@ -111,7 +121,8 @@
 
                         <div class="rating-bar">
                             {% for i in range(1, 11) %}
-                            <input type="radio" name="rating" value="{{ i }}" id="rate{{ i }}">
+                            <input type="radio" name="rating" value="{{ i }}" id="rate{{ i }}" 
+                            {% if user_data and user_data.rating|int == i %}checked{% endif %}>
                             <label for="rate{{ i }}">{{ i }}</label>
                             {% endfor %}
                         </div>
@@ -121,11 +132,30 @@
                         <label>Status</label>
 
                         <select name="status" class="status-select premium-select">
-                            <option value="plan_to_watch">📌 Plan to watch</option>
-                            <option value="watching">👀 Watching</option>
-                            <option value="completed">✅ Completed</option>
-                            <option value="on_hold">⏸ On hold</option>
-                            <option value="dropped">❌ Dropped</option>
+                            <option value="plan_to_watch" {% if user_data and user_data.status=='plan_to_watch'
+                                %}selected{% endif %}>
+                                📌 Plan to watch
+                            </option>
+
+                            <option value="watching" {% if user_data and user_data.status=='watching' %}selected{% endif
+                                %}>
+                                👀 Watching
+                            </option>
+
+                            <option value="completed" {% if user_data and user_data.status=='completed' %}selected{%
+                                endif %}>
+                                ✅ Completed
+                            </option>
+
+                            <option value="on_hold" {% if user_data and user_data.status=='on_hold' %}selected{% endif
+                                %}>
+                                ⏸ On hold
+                            </option>
+
+                            <option value="dropped" {% if user_data and user_data.status=='dropped' %}selected{% endif
+                                %}>
+                                ❌ Dropped
+                            </option>
                         </select>
                     </div>
 
