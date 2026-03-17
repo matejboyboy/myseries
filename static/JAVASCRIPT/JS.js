@@ -39,35 +39,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // === 2. HORIZONTAL SCROLL LOGIC ===
     document.querySelectorAll(".scroll-container").forEach(container => {
-
         const scrollArea = container.querySelector(".novi_relesi");
         const leftBtn = container.querySelector(".scroll-btn.left");
         const rightBtn = container.querySelector(".scroll-btn.right");
-
         if (!scrollArea || !leftBtn || !rightBtn) return;
 
         const scrollAmount = 800;
 
         function updateButtons() {
             leftBtn.style.display = scrollArea.scrollLeft > 10 ? "block" : "none";
-
-            rightBtn.style.display =
-                scrollArea.scrollLeft <
-                    (scrollArea.scrollWidth - scrollArea.clientWidth - 10)
-                    ? "block"
-                    : "none";
+            rightBtn.style.display = scrollArea.scrollLeft < (scrollArea.scrollWidth - scrollArea.clientWidth - 10) ? "block" : "none";
         }
 
-        rightBtn.addEventListener("click", () => {
-            scrollArea.scrollBy({ left: scrollAmount, behavior: "smooth" });
-        });
-
-        leftBtn.addEventListener("click", () => {
-            scrollArea.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-        });
-
+        rightBtn.addEventListener("click", () => scrollArea.scrollBy({ left: scrollAmount, behavior: "smooth" }));
+        leftBtn.addEventListener("click", () => scrollArea.scrollBy({ left: -scrollAmount, behavior: "smooth" }));
         scrollArea.addEventListener("scroll", updateButtons);
-
         updateButtons();
     });
 
@@ -91,20 +77,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateGenreButtonLabel() {
         if (!genreFilter) return;
-
         const label = genreFilter.querySelector(".select-selected");
         if (!label) return;
+        if (selectedGenres.length === 0) label.textContent = "Genres";
+        else label.textContent = selectedGenres.length <= 2 ? selectedGenres.join(", ") : `${selectedGenres.length} Genres Selected`;
+    }
 
-        if (selectedGenres.length === 0) {
-            label.textContent = "Genres";
-            return;
-        }
+    function sortSeries(container, sortVal) {
+        const items = Array.from(container.querySelectorAll(".series-link"));
+        items.sort((a, b) => {
+            const aRow = a.querySelector(".series-row");
+            const bRow = b.querySelector(".series-row");
+            const aScore = parseFloat(aRow.dataset.userScore || 0);
+            const bScore = parseFloat(bRow.dataset.userScore || 0);
+            const aName = aRow.dataset.name.toLowerCase();
+            const bName = bRow.dataset.name.toLowerCase();
 
-        if (selectedGenres.length <= 2) {
-            label.textContent = selectedGenres.join(", ");
-        } else {
-            label.textContent = `${selectedGenres.length} Genres Selected`;
-        }
+            switch (sortVal) {
+                case "score-desc": return bScore - aScore;
+                case "score-asc": return aScore - bScore;
+                case "name-asc": return aName.localeCompare(bName);
+                default: return 0;
+            }
+        });
+        items.forEach(item => container.appendChild(item));
     }
 
     window.applyFilters = function () {
@@ -112,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const searchValue = searchInput ? normalize(searchInput.value) : "";
         const searchWords = searchValue.split(" ").filter(word => word !== "");
-
         const ratingVal = ratingFilter?.dataset.value || "";
         const sourceVal = sourceFilter?.dataset.value || "";
         const userScoreVal = userScoreFilter?.dataset.value || "";
@@ -121,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // === FILTER VISIBILITY ===
         seriesRows.forEach(row => {
-
             const name = normalize(row.dataset.name);
             const rating = normalize(row.dataset.rating);
             const genre = normalize(row.dataset.genre);
@@ -129,124 +123,57 @@ document.addEventListener("DOMContentLoaded", () => {
             const userScore = row.dataset.userScore || "";
             const status = row.dataset.status || "";
 
-            const matchesSearch =
-                searchWords.length === 0 ||
-                searchWords.every(word => name.includes(word));
-
+            const matchesSearch = searchWords.length === 0 || searchWords.every(word => name.includes(word));
             const matchesRating = ratingVal === "" || rating === ratingVal;
-
-            const matchesGenre =
-                selectedGenres.length === 0 ||
-                selectedGenres.every(g => genre.includes(g));
-
+            const matchesGenre = selectedGenres.length === 0 || selectedGenres.every(g => genre.includes(g));
             const matchesSource = sourceVal === "" || source === sourceVal;
+            const matchesUserScore = userScoreVal === "" || userScore === userScoreVal;
+            const matchesStatus = statusVal === "" || status === statusVal;
 
-            const matchesUserScore =
-                userScoreVal === "" || userScore === userScoreVal;
-
-            const matchesStatus =
-                statusVal === "" || status === statusVal;
-
-            const isVisible =
-                matchesSearch &&
-                matchesRating &&
-                matchesGenre &&
-                matchesSource &&
-                matchesUserScore &&
-                matchesStatus;
-
+            const isVisible = matchesSearch && matchesRating && matchesGenre && matchesSource && matchesUserScore && matchesStatus;
             row.style.display = isVisible ? "flex" : "none";
-
-            if (row.parentElement.classList.contains("series-link")) {
-                row.parentElement.style.display = isVisible ? "block" : "none";
-            }
+            if (row.parentElement.classList.contains("series-link")) row.parentElement.style.display = isVisible ? "block" : "none";
         });
 
-        // === SORT INSIDE EACH CATEGORY ===
-        document.querySelectorAll(".category-section").forEach(section => {
-
-            const items = Array.from(section.querySelectorAll(".series-link"));
-
-            items.sort((a, b) => {
-                const aRow = a.querySelector(".series-row");
-                const bRow = b.querySelector(".series-row");
-
-                const aScore = parseFloat(aRow.dataset.userScore || 0);
-                const bScore = parseFloat(bRow.dataset.userScore || 0);
-
-                const aName = aRow.dataset.name.toLowerCase();
-                const bName = bRow.dataset.name.toLowerCase();
-
-                switch (sortVal) {
-                    case "score-desc":
-                        return bScore - aScore;
-
-                    case "score-asc":
-                        return aScore - bScore;
-
-                    case "name-asc":
-                        return aName.localeCompare(bName);
-
-                    default:
-                        return 0;
-                }
-            });
-
-            items.forEach(item => section.appendChild(item));
-
-            // === HIDE EMPTY SECTIONS ===
-            const visible = section.querySelectorAll(".series-row:not([style*='none'])");
-            section.style.display = visible.length ? "block" : "none";
-        });
+        // === SORT SERIES ===
+        const categorySections = document.querySelectorAll(".category-section");
+        if (categorySections.length) {
+            categorySections.forEach(section => sortSeries(section, sortVal));
+        } else {
+            sortSeries(seriesContainer, sortVal); // fallback for main list
+        }
     };
 
-    if (searchInput) {
-        searchInput.addEventListener("input", window.applyFilters);
-    }
+    if (searchInput) searchInput.addEventListener("input", window.applyFilters);
 
     // === 4. CUSTOM SELECT LOGIC ===
     document.querySelectorAll(".custom-select").forEach(select => {
         const selected = select.querySelector(".select-selected");
         const options = select.querySelector(".select-options");
-
         if (!selected || !options) return;
 
         const optionItems = options.querySelectorAll("div");
-
-        selected.addEventListener("click", (e) => {
+        selected.addEventListener("click", e => {
             e.stopPropagation();
-
-            document.querySelectorAll(".custom-select").forEach(s => {
-                if (s !== select) s.classList.remove("active");
-            });
-
+            document.querySelectorAll(".custom-select").forEach(s => { if (s !== select) s.classList.remove("active"); });
             select.classList.toggle("active");
         });
 
         optionItems.forEach(option => {
             option.addEventListener("click", () => {
                 const val = option.dataset.value;
-
                 selected.textContent = option.textContent;
                 select.dataset.value = val;
-
                 const hiddenInput = select.querySelector('input[type="hidden"]');
                 if (hiddenInput) hiddenInput.value = val;
-
                 select.classList.remove("active");
-
-                if (typeof window.applyFilters === "function") {
-                    window.applyFilters();
-                }
+                if (typeof window.applyFilters === "function") window.applyFilters();
             });
         });
     });
 
-    // ✅ GLOBAL CLICK HANDLER (single, clean)
     document.addEventListener("click", () => {
-        document.querySelectorAll(".custom-select").forEach(s =>
-            s.classList.remove("active")
-        );
+        document.querySelectorAll(".custom-select").forEach(s => s.classList.remove("active"));
     });
 
     // === 5. GENRE DROPDOWN PANEL LOGIC ===
@@ -254,79 +181,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const genreModal = document.getElementById("genreModal");
     const closeGenreModal = document.getElementById("closeGenreModal");
     const applyGenresBtn = document.getElementById("applyGenres");
-
     const genreCheckboxes = document.querySelectorAll(".genre-grid input");
 
     if (genreButton) {
-
-        genreButton.addEventListener("click", (e) => {
-            e.stopPropagation();
-            genreButton.classList.toggle("active");
-        });
-
-        // ✅ Prevent closing when clicking inside panel
-        genreModal?.addEventListener("click", (e) => {
-            e.stopPropagation();
-        });
-
-        closeGenreModal?.addEventListener("click", () => {
-            genreButton.classList.remove("active");
-        });
-
+        genreButton.addEventListener("click", e => { e.stopPropagation(); genreButton.classList.toggle("active"); });
+        genreModal?.addEventListener("click", e => e.stopPropagation());
+        closeGenreModal?.addEventListener("click", () => genreButton.classList.remove("active"));
         applyGenresBtn?.addEventListener("click", () => {
             selectedGenres = [];
-
-            genreCheckboxes.forEach(cb => {
-                if (cb.checked) {
-                    selectedGenres.push(cb.value.toLowerCase());
-                }
-            });
-
+            genreCheckboxes.forEach(cb => { if (cb.checked) selectedGenres.push(cb.value.toLowerCase()); });
             updateGenreButtonLabel();
             genreButton.classList.remove("active");
-
-            if (typeof window.applyFilters === "function") {
-                window.applyFilters();
-            }
+            if (typeof window.applyFilters === "function") window.applyFilters();
         });
     }
 
-});
-document.querySelectorAll(".wheel-scroll").forEach(container => {
+    // === 6. WHEEL SCROLL ===
+    document.querySelectorAll(".wheel-scroll").forEach(container => {
+        let scrollAmount = 0;
+        let isScrolling = false;
 
-    let scrollAmount = 0;
-    let isScrolling = false;
+        container.addEventListener("wheel", e => {
+            e.preventDefault();
+            scrollAmount += e.deltaY * -0.6;
+            if (!isScrolling) smoothScroll();
+        });
 
-    container.addEventListener("wheel", (e) => {
-        e.preventDefault();
-
-        scrollAmount += e.deltaY * -0.6;
-
-        if (!isScrolling) {
-            smoothScroll();
+        function smoothScroll() {
+            isScrolling = true;
+            container.scrollLeft += scrollAmount;
+            scrollAmount *= 0.85;
+            if (Math.abs(scrollAmount) > 0.5) requestAnimationFrame(smoothScroll);
+            else { scrollAmount = 0; isScrolling = false; }
         }
     });
 
-    function smoothScroll() {
-        isScrolling = true;
-
-        container.scrollLeft += scrollAmount;
-
-        scrollAmount *= 0.85; // inertia / friction
-
-        if (Math.abs(scrollAmount) > 0.5) {
-            requestAnimationFrame(smoothScroll);
-        } else {
-            scrollAmount = 0;
-            isScrolling = false;
-        }
-    }
-});
-document.querySelectorAll(".home_podnaslov").forEach(title => {
-    title.addEventListener("click", (e) => {
-        e.stopPropagation();
+    document.querySelectorAll(".home_podnaslov").forEach(title => {
+        title.addEventListener("click", e => e.stopPropagation());
     });
+
 });
-
-
-
