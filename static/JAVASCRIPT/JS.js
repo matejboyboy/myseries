@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sourceFilter = document.getElementById("sourceFilter");
     const userScoreFilter = document.getElementById("userScoreFilter");
     const sortFilter = document.getElementById("sortFilter");
+    const statusFilter = document.getElementById("statusFilter");
 
     const seriesContainer = document.querySelector(".series-list");
     let seriesRows = Array.from(document.querySelectorAll(".series-row"));
@@ -116,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const sourceVal = sourceFilter ? (sourceFilter.dataset.value || "") : "";
         const userScoreVal = userScoreFilter ? (userScoreFilter.dataset.value || "") : "";
         const sortVal = sortFilter ? (sortFilter.dataset.value || "default") : "default";
+        const statusVal = statusFilter ? (statusFilter.dataset.value || "") : "";
 
         let filteredRows = seriesRows.filter(row => {
             const name = normalize(row.dataset.name);
@@ -140,13 +142,25 @@ document.addEventListener("DOMContentLoaded", () => {
             const matchesUserScore =
                 userScoreVal === "" || userScore === userScoreVal;
 
+            const status = row.dataset.status || "";
+
+            const matchesStatus =
+                statusVal === "" || status === statusVal;
+
             return (
                 matchesSearch &&
                 matchesRating &&
                 matchesGenre &&
                 matchesSource &&
-                matchesUserScore
+                matchesUserScore &&
+                matchesStatus
             );
+
+        });
+        document.querySelectorAll(".category-section").forEach(section => {
+            const visible = section.querySelectorAll(".series-row[style*='flex']");
+
+            section.style.display = visible.length ? "block" : "none";
         });
 
         // === SORTING ===
