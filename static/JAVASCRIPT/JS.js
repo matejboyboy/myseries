@@ -158,9 +158,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
         document.querySelectorAll(".category-section").forEach(section => {
-            const visible = section.querySelectorAll(".series-row[style*='flex']");
 
-            section.style.display = visible.length ? "block" : "none";
+            const visibleItems = section.querySelectorAll(".series-row:not([style*='none'])");
+
+            section.style.display = visibleItems.length ? "block" : "none";
         });
 
         // === SORTING ===
@@ -188,20 +189,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // === HIDE ALL ===
         seriesRows.forEach(row => {
-            row.style.display = "none";
+
+            const name = normalize(row.dataset.name);
+            const rating = normalize(row.dataset.rating);
+            const genre = normalize(row.dataset.genre);
+            const source = normalize(row.dataset.source);
+            const userScore = row.dataset.userScore || "";
+            const status = row.dataset.status || "";
+
+            const matchesSearch =
+                searchWords.length === 0 ||
+                searchWords.every(word => name.includes(word));
+
+            const matchesRating = ratingVal === "" || rating === ratingVal;
+
+            const matchesGenre =
+                selectedGenres.length === 0 ||
+                selectedGenres.every(g => genre.includes(g));
+
+            const matchesSource = sourceVal === "" || source === sourceVal;
+
+            const matchesUserScore =
+                userScoreVal === "" || userScore === userScoreVal;
+
+            const matchesStatus =
+                statusVal === "" || status === statusVal;
+
+            const isVisible =
+                matchesSearch &&
+                matchesRating &&
+                matchesGenre &&
+                matchesSource &&
+                matchesUserScore &&
+                matchesStatus;
+
+            // ✅ Toggle visibility
+            row.style.display = isVisible ? "flex" : "none";
 
             if (row.parentElement.classList.contains("series-link")) {
-                row.parentElement.style.display = "none";
+                row.parentElement.style.display = isVisible ? "block" : "none";
             }
         });
-
         // === SHOW FILTERED ===
         filteredRows.forEach(row => {
             row.style.display = "flex";
 
             if (row.parentElement.classList.contains("series-link")) {
                 row.parentElement.style.display = "block";
-                seriesContainer.appendChild(row.parentElement);
             }
         });
     };
