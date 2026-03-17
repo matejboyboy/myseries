@@ -15,10 +15,11 @@
     --ui-surface-2: rgb(240, 240, 240);
     --ui-surface-3: rgb(235, 235, 235);
     --ui-surface-modal: rgb(235, 235, 235);
-    --ui-hover: rgb(105, 105, 105);
     --accent-rgb: 103, 103, 255;
     --success: #28a745;
     --danger: #8b0000;
+    --ui-hover: rgb(235, 235, 245);
+    --border-soft: rgba(0,0,0,0.08);
 }
 
 body.dark-theme {
@@ -38,10 +39,11 @@ body.dark-theme {
     --ui-surface-2: rgb(85, 85, 85);
     --ui-surface-3: rgb(60, 60, 60);
     --ui-surface-modal: rgb(50, 50, 50);
-    --ui-hover: rgb(115, 115, 115);
     --accent-rgb: 103, 103, 255;
     --success: #28a745;
     --danger: #8b0000;
+    --ui-hover: rgb(115, 115, 115); /* ✅ keep your dark hover */
+    --border-soft: rgba(255,255,255,0.08);
 }
 
 
@@ -1807,21 +1809,29 @@ body {
 
     cursor: pointer;
 
+    border: 1px solid var(--border-soft);
+
     box-shadow: 0 6px 14px var(--shadow-soft);
     transition: all 0.25s ease;
 }
 
-/* Hover */
+/* Hover = subtle (NOT accent blast) */
 .rating-bar label:hover {
     transform: translateY(-2px);
-    background: var(--accent);
+
+    background: linear-gradient(145deg,
+        var(--ui-hover),
+        var(--ui-surface-2));
 }
 
-/* Selected */
+/* Selected = accent (only here) */
 .rating-bar input:checked + label {
     background: var(--accent);
+    color: white;
+
     box-shadow:
         0 10px 20px rgba(var(--accent-rgb), 0.5);
+
     transform: translateY(-2px) scale(1.05);
 }
 .premium-select {
@@ -1829,7 +1839,7 @@ body {
     padding: 14px 16px;
 
     border-radius: 0.9rem;
-    border: 1px solid var(--ui-surface-2);
+    border: 1px solid var(--border-soft);
 
     background: linear-gradient(145deg,
         var(--ui-surface),
@@ -1852,7 +1862,7 @@ body {
     background: var(--ui-hover);
 }
 
-/* Focus glow */
+/* Focus */
 .premium-select:focus {
     outline: none;
     border-color: var(--accent);
@@ -1860,4 +1870,8 @@ body {
     box-shadow:
         inset 0 4px 10px var(--shadow-strong),
         0 0 12px rgba(var(--accent-rgb), 0.6);
+}
+select option {
+    background: var(--ui-surface);
+    color: var(--text-main);
 }
