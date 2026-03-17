@@ -167,6 +167,17 @@
                     <div data-value="name-asc">Name (A-Z)</div>
                 </div>
             </div>
+            <div class="custom-select" id="statusFilter">
+                <div class="select-selected">Status</div>
+                <div class="select-options">
+                    <div data-value="">All Status</div>
+                    <div data-value="watching">Watching</div>
+                    <div data-value="completed">Completed</div>
+                    <div data-value="plan_to_watch">Plan to Watch</div>
+                    <div data-value="on_hold">On Hold</div>
+                    <div data-value="dropped">Dropped</div>
+                </div>
+            </div>
         </div>
         {% set statuses = {
         "watching":"Watching",
@@ -192,7 +203,7 @@
 
                 <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating | lower }}"
                     data-genre="{{ s.genre | lower }}" data-source="{{ s.source | lower }}"
-                    data-user-score="{{ s.user_score }}">
+                    data-user-score="{{ s.user_score }}" data-status="{{ s.status }}">
 
                     <div class="series-image">
                         <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}" alt="{{ s.name }}">
