@@ -211,6 +211,10 @@
                     <p class="series-meta"><strong>Genre:</strong> {{ s.genre }}</p>
                     <p class="series-meta"><strong>Rating:</strong> {{ s.rating }}</p>
 
+                    {% if s.user_score %}
+                    <p class="series-meta"><strong>Your Score:</strong> {{ s.user_score }}</p>
+                    {% endif %}
+
                 </div>
             </div>
         </a>
