@@ -1875,3 +1875,46 @@ select option {
     background: var(--ui-surface);
     color: var(--text-main);
 }
+.select-options {
+    pointer-events: none;
+}
+.custom-select.active .select-options {
+    pointer-events: auto;
+}
+.status-badge {
+    display: inline-block;
+    margin: 6px 0 10px 0;
+    padding: 6px 12px;
+
+    border-radius: 0.7rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+
+    text-transform: capitalize;
+}
+
+/* COLORS */
+.status-watching {
+    background: rgba(77, 171, 247, 0.2);
+    color: #4dabf7;
+}
+
+.status-completed {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.status-plan_to_watch {
+    background: rgba(155, 89, 182, 0.2);
+    color: #9b59b6;
+}
+
+.status-on_hold {
+    background: rgba(241, 196, 15, 0.2);
+    color: #f1c40f;
+}
+
+.status-dropped {
+    background: rgba(255, 90, 90, 0.2);
+    color: #ff5a5a;
+}
