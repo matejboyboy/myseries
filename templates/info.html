@@ -106,17 +106,30 @@
 
                 <form method="POST" action="/add_to_list">
                     <input type="hidden" name="series_id" value="{{ series.id }}">
-                    <label>Rating</label>
-                    <input type="number" name="rating" min="1" max="10">
-                    <label>Status</label>
-                    <select name="status">
-                        <option value="plan_to_watch">Plan to watch</option>
-                        <option value="watching">Watching</option>
-                        <option value="completed">Completed</option>
-                        <option value="on_hold">On hold</option>
-                        <option value="dropped">Dropped</option>
-                    </select>
-                    <button type="submit">Save</button>
+                    <div class="form-group">
+                        <label>Rating</label>
+
+                        <div class="rating-bar">
+                            {% for i in range(1, 11) %}
+                            <input type="radio" name="rating" value="{{ i }}" id="rate{{ i }}">
+                            <label for="rate{{ i }}">{{ i }}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+
+                        <select name="status" class="status-select premium-select">
+                            <option value="plan_to_watch">📌 Plan to watch</option>
+                            <option value="watching">👀 Watching</option>
+                            <option value="completed">✅ Completed</option>
+                            <option value="on_hold">⏸ On hold</option>
+                            <option value="dropped">❌ Dropped</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="primary-action-btn">Save</button>
                 </form>
 
                 {% else %}
