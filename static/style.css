@@ -1,14 +1,10 @@
-/* ================= GLOBAL CLEANUP ================= */
 :root {
     --bg-main: radial-gradient(circle at top left, rgb(235, 240, 255), rgb(210, 220, 245));
     --nav-bg: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(240, 245, 255, 0.85));
     --card-bg: rgb(255, 255, 255);
-
     --text-main: rgb(63, 100, 212);
     --text-soft: rgb(90, 95, 115);
-
     --accent: rgb(103, 103, 255);
-
     --shadow-soft: rgba(0, 0, 0, 0.12);
     --shadow-strong: rgba(0, 0, 0, 0.18);
     --ui-surface: rgb(224, 224, 224);
@@ -26,13 +22,9 @@ body.dark-theme {
     --bg-main: radial-gradient(circle at top left, rgb(95, 100, 110), rgb(60, 63, 65) 60%);
     --nav-bg: linear-gradient(to bottom, rgba(67, 69, 71, 0.95), rgba(67, 69, 71, 0.85));
     --card-bg: rgb(68, 68, 68);
-
     --text-main: white;
     --text-soft: #ddd;
-
     --accent: rgb(103, 103, 255);
-    /* optional but safe */
-
     --shadow-soft: rgba(0, 0, 0, 0.35);
     --shadow-strong: rgba(0, 0, 0, 0.55);
     --ui-surface: rgb(97, 97, 97);
@@ -42,10 +34,9 @@ body.dark-theme {
     --accent-rgb: 103, 103, 255;
     --success: #28a745;
     --danger: #8b0000;
-    --ui-hover: rgb(115, 115, 115); /* ✅ keep your dark hover */
+    --ui-hover: rgb(115, 115, 115);
     --border-soft: rgba(255,255,255,0.08);
 }
-
 
 * {
     box-sizing: border-box;
@@ -376,7 +367,6 @@ body {
     font-family: impact;
     font-size: 1.8rem;
     margin-bottom: 8px;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
 }
 
 .series-meta {
