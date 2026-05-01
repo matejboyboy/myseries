@@ -24,8 +24,7 @@
                         <a href="/profile" class="nav-profile-bubble">
 
                             {% if session.get('profile_pic') %}
-                            <img src="{{ url_for('static', filename='profile_pic/' + session.profile_pic) }}"
-                                class="nav-avatar">
+                            <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}" class="nav-avatar">
                             {% else %}
                             {{ session.username[0] | upper }}
                             {% endif %}

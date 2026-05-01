@@ -25,8 +25,7 @@
                         <a href="/profile" class="nav-profile-bubble">
 
                             {% if session.get('profile_pic') %}
-                            <img src="{{ url_for('static', filename='profile_pic/' + session.profile_pic) }}"
-                                class="nav-avatar">
+                            <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}" class="nav-avatar">
                             {% else %}
                             {{ session.username[0] | upper }}
                             {% endif %}
@@ -201,39 +200,59 @@
 </body>
 <script>
 const genreDescriptions = {
+    // Action & Combat
     "Action": "Fast-paced stories driven by physical conflict, battles, and high-energy sequences.",
-    "Horror": "Designed to evoke fear, dread, and tension, often exploring dark or disturbing themes.",
-    "Dark Fantasy": "Fantasy with darker, mature themes, moral ambiguity, and grim worlds.",
-    "Adventure": "Focused on journeys, exploration, and exciting experiences.",
+    "Martial Arts": "Focused on hand-to-hand combat, traditional fighting styles, and discipline.",
+    "Mecha": "Features giant robots, cyborgs, and highly advanced mechanical warfare.",
+    
+    // Fantasy & Supernatural
     "Fantasy": "Stories featuring magic, mythical creatures, and imaginative worlds.",
-    "Comedy": "Lighthearted narratives intended to entertain and amuse.",
-    "Supernatural": "Involving paranormal forces, spirits, or unexplained phenomena.",
-    "Sci-Fi": "Explores futuristic concepts, science, technology, and space.",
-    "Crime": "Centered on criminal acts, investigations, or underworld themes.",
-    "Drama": "Character-driven stories emphasizing emotional depth and realism.",
-    "Cyberpunk": "Futuristic worlds blending advanced technology with societal decay.",
-    "Thriller": "Built on suspense, tension, and psychological intensity.",
-    "Spy": "Focused on espionage, secret missions, and covert operations.",
-    "SuperHero": "Featuring heroes with extraordinary abilities or powers.",
-    "Romance": "Centered on love, relationships, and emotional connections.",
-    "Military": "Involving warfare, soldiers, and combat scenarios.",
-    "Business": "Stories revolving around corporate life, strategy, and ambition.",
-    "School": "Set primarily in academic environments.",
-    "Historical": "Based on past events, periods, or civilizations.",
-    "Epic": "Large-scale narratives with grand conflicts and scope.",
-    "Harem": "One central character surrounded by multiple romantic interests.",
-    "Slice of Life": "Depicts everyday experiences and realistic situations.",
-    "Workplace": "Focused on professional environments and careers.",
-    "Psychological": "Explores the mind, emotions, and mental conflict.",
-    "Mystery": "Driven by puzzles, secrets, and investigations.",
-    "Legal": "Centered on law, trials, and courtroom drama.",
-    "Music": "Strongly tied to musical themes or performance.",
-    "Sports": "Focused on athletic competition and growth.",
-    "Magic": "Stories where magical systems play a major role.",
-    "Soccer": "Centered specifically on football/soccer themes.",
-    "Family": "Designed around family relationships and dynamics.",
-    "Animation": "Animated storytelling across various genres.",
-    "Revenge": "Driven by retaliation, justice, or personal vendettas."
+    "Dark Fantasy": "Fantasy with darker, mature themes, moral ambiguity, and grim worlds.",
+    "Supernatural": "Involving paranormal forces, spirits, vampires, or unexplained phenomena.",
+    "Magic": "Stories where intricate magical systems and spells play a major role.",
+    "Isekai": "Characters are transported, reborn, or trapped in a parallel universe or game world.",
+    "Xianxia": "Chinese high fantasy featuring immortal cultivation, gods, and cosmic magic.",
+    "Wuxia": "Chinese martial arts fiction focusing on earthly warriors, chi, and honor.",
+    
+    // Sci-Fi & Speculative
+    "Sci-Fi": "Explores futuristic concepts, science, technology, and space exploration.",
+    "Cyberpunk": "Futuristic worlds blending advanced technology with societal decay and corporate control.",
+    "Post-Apocalyptic": "Set in a world struggling to survive after a global disaster or collapse.",
+    "Time Travel": "Characters leap forward or backward through time to alter history or their fate.",
+    "System": "Characters interact with a video-game-like interface granting them quests and stats.",
+    "LitRPG": "A literary genre blending narrative fiction with RPG mechanics like leveling up.",
+    
+    // Drama, Thriller & Horror
+    "Drama": "Character-driven stories emphasizing emotional depth, conflict, and realism.",
+    "Horror": "Designed to evoke fear, dread, and tension, often exploring dark or disturbing themes.",
+    "Thriller": "Built on intense suspense, tension, high stakes, and psychological pressure.",
+    "Mystery": "Driven by puzzles, secrets, crime-solving, and investigations.",
+    "Psychological": "Explores the mind, fragile mental states, emotional conflict, and manipulation.",
+    "Revenge": "Driven by retaliation, ruthless justice, or deeply personal vendettas.",
+    "Crime": "Centered on criminal acts, detective investigations, or underworld themes.",
+    "Spy": "Focused on espionage, secret missions, covert operations, and global threats.",
+    
+    // Romance & Social
+    "Romance": "Centered on love, developing relationships, and emotional connections.",
+    "Harem": "One central character is surrounded by three or more romantic interests.",
+    "Comedy": "Lighthearted narratives intended to entertain, amuse, and trigger laughter.",
+    "Slice of Life": "Depicts everyday experiences, mundane routines, and realistic situations.",
+    "School": "Set primarily in academic environments focusing on student life and youth.",
+    "Workplace": "Focused on adult professional environments, career struggles, and office dynamics.",
+    "Family": "Designed around family relationships, parenting, and household dynamics.",
+    
+    // Specific Themes
+    "Adventure": "Focused on grand journeys, exploration, and exciting unpredictable experiences.",
+    "SuperHero": "Featuring heroes with extraordinary abilities protecting society from villains.",
+    "Military": "Involving warfare, soldiers, strategy, and intense combat scenarios.",
+    "Business": "Stories revolving around corporate life, economics, strategy, and financial ambition.",
+    "Historical": "Based on actual past events, periods, or historical civilizations.",
+    "Epic": "Large-scale narratives with grand conflicts, massive casts, and sweeping scope.",
+    "Legal": "Centered on law, intense trials, lawyers, and courtroom drama.",
+    "Music": "Strongly tied to musical themes, bands, idols, or instrumental performance.",
+    "Sports": "Focused on athletic competition, teamwork, tournaments, and physical growth.",
+    "Soccer": "Centered specifically on football/soccer themes and championships.",
+    "Animation": "Animated storytelling across various themes and styles."
 };
 
 document.querySelectorAll(".genre-tag").forEach(tag => {

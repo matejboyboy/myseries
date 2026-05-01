@@ -21,8 +21,7 @@
                     <a href="/profile" class="nav-profile-bubble">
 
                         {% if session.get('profile_pic') %}
-                        <img src="{{ url_for('static', filename='profile_pic/' + session.profile_pic) }}"
-                            class="nav-avatar">
+                        <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}" class="nav-avatar">
                         {% else %}
                         {{ session.username[0] | upper }}
                         {% endif %}
@@ -61,7 +60,7 @@
             <div class="profile_header_layout">
                 <div class="avatar_wrapper" onclick="openModal()">
                     {% if profile_pic %}
-                    <img src="{{ url_for('static', filename='profile_pic/' + profile_pic) }}" class="avatar_img">
+                    <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}" class="nav-avatar">
                     {% else %}
                     <div class="avatar_large">{{ username[0] | upper }}</div>
                     {% endif %}
@@ -99,7 +98,7 @@
 
             <div class="pic_grid">
                 {% for img in images %}
-                <img src="{{ url_for('static', filename='profile_pic/' + img) }}" class="pic_option"
+                <img src="{{ url_for('static', filename='PROFILE_PIC/' + img) }}" class="pic_option"
                     onclick="setProfilePic('{{ img }}')">
                 {% endfor %}
             </div>
