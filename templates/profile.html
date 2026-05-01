@@ -8,7 +8,9 @@
     <title>MySeries - Profile</title>
 </head>
 
-<body class="homepage {{ current_theme | default('light') }}-theme"></body>
+<!-- FIXED: Removed the accidental </body> tag closing here -->
+
+<body class="homepage {{ current_theme | default('light') }}-theme">
 
     <header>
         <nav class="home_nav">
@@ -21,7 +23,8 @@
                     <a href="/profile" class="nav-profile-bubble">
 
                         {% if session.get('profile_pic') %}
-                        <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}" class="nav-avatar">
+                        <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}"
+                            class="nav-avatar">
                         {% else %}
                         {{ session.username[0] | upper }}
                         {% endif %}
@@ -60,7 +63,8 @@
             <div class="profile_header_layout">
                 <div class="avatar_wrapper" onclick="openModal()">
                     {% if profile_pic %}
-                    <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}" class="nav-avatar">
+                    <!-- FIXED: Using 'profile_pic' variable and 'avatar_img' class -->
+                    <img src="{{ url_for('static', filename='PROFILE_PIC/' + profile_pic) }}" class="avatar_img">
                     {% else %}
                     <div class="avatar_large">{{ username[0] | upper }}</div>
                     {% endif %}
