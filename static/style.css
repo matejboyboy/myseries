@@ -1120,7 +1120,6 @@ body {
     padding: 12px 15px;
 
     background: rgba(var(--ui-surface-3), 0.95);
-    /* softer + translucent */
     backdrop-filter: blur(10px);
 
     color: #f0f0f0;
