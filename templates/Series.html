@@ -162,12 +162,10 @@
             <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating}}"
                 data-genre="{{ s.genre | lower }}" data-source="{{ s.source}}">
 
-                <!-- IMAGE -->
                 <div class="series-image">
                     <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}" alt="{{ s.name }}">
                 </div>
 
-                <!-- INFO -->
                 <div class="series-info">
                     <h3 class="series-title" data-name="{{ s.name | lower }}">{{ s.name }}</h3>
                     <p><strong>Genre:</strong>
@@ -201,5 +199,50 @@
     </footer>
     <script src="{{ url_for('static', filename='JAVASCRIPT/JS.js') }}"></script>
 </body>
+<script>
+const genreDescriptions = {
+    "Action": "Fast-paced stories driven by physical conflict, battles, and high-energy sequences.",
+    "Horror": "Designed to evoke fear, dread, and tension, often exploring dark or disturbing themes.",
+    "Dark Fantasy": "Fantasy with darker, mature themes, moral ambiguity, and grim worlds.",
+    "Adventure": "Focused on journeys, exploration, and exciting experiences.",
+    "Fantasy": "Stories featuring magic, mythical creatures, and imaginative worlds.",
+    "Comedy": "Lighthearted narratives intended to entertain and amuse.",
+    "Supernatural": "Involving paranormal forces, spirits, or unexplained phenomena.",
+    "Sci-Fi": "Explores futuristic concepts, science, technology, and space.",
+    "Crime": "Centered on criminal acts, investigations, or underworld themes.",
+    "Drama": "Character-driven stories emphasizing emotional depth and realism.",
+    "Cyberpunk": "Futuristic worlds blending advanced technology with societal decay.",
+    "Thriller": "Built on suspense, tension, and psychological intensity.",
+    "Spy": "Focused on espionage, secret missions, and covert operations.",
+    "SuperHero": "Featuring heroes with extraordinary abilities or powers.",
+    "Romance": "Centered on love, relationships, and emotional connections.",
+    "Military": "Involving warfare, soldiers, and combat scenarios.",
+    "Business": "Stories revolving around corporate life, strategy, and ambition.",
+    "School": "Set primarily in academic environments.",
+    "Historical": "Based on past events, periods, or civilizations.",
+    "Epic": "Large-scale narratives with grand conflicts and scope.",
+    "Harem": "One central character surrounded by multiple romantic interests.",
+    "Slice of Life": "Depicts everyday experiences and realistic situations.",
+    "Workplace": "Focused on professional environments and careers.",
+    "Psychological": "Explores the mind, emotions, and mental conflict.",
+    "Mystery": "Driven by puzzles, secrets, and investigations.",
+    "Legal": "Centered on law, trials, and courtroom drama.",
+    "Music": "Strongly tied to musical themes or performance.",
+    "Sports": "Focused on athletic competition and growth.",
+    "Magic": "Stories where magical systems play a major role.",
+    "Soccer": "Centered specifically on football/soccer themes.",
+    "Family": "Designed around family relationships and dynamics.",
+    "Animation": "Animated storytelling across various genres.",
+    "Revenge": "Driven by retaliation, justice, or personal vendettas."
+};
+
+document.querySelectorAll(".genre-tag").forEach(tag => {
+    const genre = tag.dataset.genre.trim();
+    if (genreDescriptions[genre]) {
+        tag.setAttribute("data-tooltip", genreDescriptions[genre]);
+    }
+});
+</script>
+
 
 </html>
