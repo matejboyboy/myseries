@@ -1107,6 +1107,8 @@ body {
 
 /* ================= TOOLTIP ================= */
 
+/* ================= TOOLTIP ================= */
+
 .genre-tag::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -1119,20 +1121,21 @@ body {
     width: 260px;
     padding: 12px 15px;
 
-    background: rgba(var(--ui-surface-3), 0.95);
+    /* Fixed: Using a solid variable so it doesn't break the CSS */
+    background: var(--ui-surface-3);
     backdrop-filter: blur(10px);
 
-    color: #f0f0f0;
+    /* Fixed: Text color adapts to light/dark mode for readability */
+    color: var(--text-main);
     font-size: 0.85rem;
     line-height: 1.45;
 
     border-radius: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-soft);
 
     pointer-events: none;
 
-    /* MUCH softer shadow */
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 18px var(--shadow-strong);
 
     transition: all 0.22s ease;
     z-index: 50;
@@ -1150,7 +1153,8 @@ body {
 
     border-width: 6px;
     border-style: solid;
-    border-color: rgba(30, 30, 30, 1) transparent transparent transparent;
+    /* Fixed: Match the arrow color to the new background */
+    border-color: var(--ui-surface-3) transparent transparent transparent;
 
     transition: all 0.22s ease;
 }
