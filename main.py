@@ -10,7 +10,7 @@ import psycopg2.extras
 app = Flask(__name__)
 app.secret_key = "some-long-random-string"
 
-UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'profile_pic')
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'PROFILE_PIC')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
@@ -306,7 +306,7 @@ def profile():
     if "username" not in session:
         return redirect(url_for("login"))
 
-    pic_folder = os.path.join(app.root_path, 'static', 'profile_pic')
+    pic_folder = os.path.join(app.root_path, 'static', 'PROFILE_PIC')
     if not os.path.exists(pic_folder):
         os.makedirs(pic_folder)
 
