@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>HomePage</title>
+    <title>{{ _('HomePage') }}</title>
 </head>
 
 <body class="homepage {{ current_theme | default('light') }}-theme">
@@ -38,17 +38,17 @@
 
             <!-- BOTTOM ROW -->
             <div class="nav_bottom_row">
-                <a href="/">Home</a>
-                <a href="/series">Series</a>
+                <a href="/">{{ _('Home') }}</a>
+                <a href="/series">{{ _('Series') }}</a>
 
                 {% if session.get('username') %}
-                <a href="/my_series">My Series</a>
+                <a href="/my_series">{{ _('My Series') }}</a>
                 {% endif %}
-                <a href="/about_us">About us</a>
+                <a href="/about_us">{{ _('About us') }}</a>
 
                 {% if not session.get('username') %}
-                <a href="/register">Register</a>
-                <a href="/login">Login</a>
+                <a href="/register">{{ _('Register') }}</a>
+                <a href="/login">{{ _('Login') }}</a>
                 {% endif %}
             </div>
 
@@ -59,7 +59,7 @@
 
         <!-- ====================== HOT NEW SERIES SLIDER ====================== -->
         <div>
-            <h2 class="home_podnaslov">Hot new series!</h2>
+            <h2 class="home_podnaslov">{{ _('Hot new series!') }}</h2>
             <div class="container">
                 <div class="slide_wrapper">
 
@@ -68,14 +68,14 @@
                         <div class="slide">
                             <a href="{{ url_for('series_info', series_id=s.id) }}">
                                 <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}"
-                                    alt="{{ s.name }} Cover">
+                                    alt="{{ s.name }} {{ _('Cover') }}">
 
                                 <div class="slide-info">
                                     <h3>{{ s.name }}</h3>
                                     <p>
-                                        {{ s.episodes or "?" }} Episodes •
-                                        {{ s.duration or "?" }} min •
-                                        {{ s.genre or "Unknown" }}
+                                        {{ s.episodes or "?" }} {{ _('Episodes') }} •
+                                        {{ s.duration or "?" }} {{ _('min') }} •
+                                        {{ _(s.genre) if s.genre else _("Unknown") }}
                                     </p>
                                 </div>
                             </a>
@@ -94,7 +94,7 @@
 
         <!-- ====================== NEWEST SERIES ====================== -->
         <div class="category-section">
-            <h2 class="home_podnaslov">Newest Shows</h2>
+            <h2 class="home_podnaslov">{{ _('Newest Shows') }}</h2>
             <div class="scroll-container">
 
                 <button class="scroll-btn left">&#10094;</button>
@@ -114,7 +114,7 @@
 
         <!-- ====================== ROMANCE ====================== -->
         <div class="category-section">
-            <h2 class="home_podnaslov">Romance</h2>
+            <h2 class="home_podnaslov">{{ _('Romance') }}</h2>
             <div class="scroll-container">
 
                 <button class="scroll-btn left">&#10094;</button>
@@ -134,7 +134,7 @@
 
         <!-- ====================== ACTION ====================== -->
         <div class="category-section">
-            <h2 class="home_podnaslov">Action</h2>
+            <h2 class="home_podnaslov">{{ _('Action') }}</h2>
             <div class="scroll-container">
 
                 <button class="scroll-btn left">&#10094;</button>
@@ -154,7 +154,7 @@
 
         <!-- ====================== DRAMA ====================== -->
         <div class="category-section">
-            <h2 class="home_podnaslov">Drama</h2>
+            <h2 class="home_podnaslov">{{ _('Drama') }}</h2>
             <div class="scroll-container">
 
                 <button class="scroll-btn left">&#10094;</button>
@@ -172,11 +172,10 @@
             </div>
         </div>
 
-
     </section>
 
     <footer class="footer">
-        <p>Copyright &copy; MySeries 2024</p>
+        <p>{{ _('Copyright') }} &copy; MySeries 2024</p>
     </footer>
 
     <script src="{{ url_for('static', filename='JAVASCRIPT/JS.js') }}"></script>

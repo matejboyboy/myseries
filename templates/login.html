@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Login</title>
+    <title>{{ _('Login') }}</title>
 </head>
 
 <body class="homepage {{ current_theme | default('light') }}-theme">
@@ -39,17 +39,17 @@
 
             <!-- BOTTOM ROW -->
             <div class="nav_bottom_row">
-                <a href="/">Home</a>
-                <a href="/series">Series</a>
+                <a href="/">{{ _('Home') }}</a>
+                <a href="/series">{{ _('Series') }}</a>
 
                 {% if session.get('username') %}
-                <a href="/my_series">My Series</a>
+                <a href="/my_series">{{ _('My Series') }}</a>
                 {% endif %}
-                <a href="/about_us">About us</a>
+                <a href="/about_us">{{ _('About us') }}</a>
 
                 {% if not session.get('username') %}
-                <a href="/register">Register</a>
-                <a href="/login">Login</a>
+                <a href="/register">{{ _('Register') }}</a>
+                <a href="/login">{{ _('Login') }}</a>
                 {% endif %}
             </div>
         </nav>
@@ -58,21 +58,21 @@
 
     <section class="series-list">
 
-        <h2 class="home_podnaslov">Login</h2>
+        <h2 class="home_podnaslov">{{ _('Login') }}</h2>
 
         <div class="form-card">
 
             {% for category, msg in get_flashed_messages(with_categories=true) %}
-            <p style="color:white; margin-bottom:10px;">{{ msg }}</p>
+            <p style="color:white; margin-bottom:10px;">{{ _(msg) }}</p>
             {% endfor %}
 
             <form method="POST" style="display:flex;flex-direction:column;gap:15px;">
 
-                <input type="text" name="username" placeholder="Username" class="series-search" required>
+                <input type="text" name="username" placeholder="{{ _('Username') }}" class="series-search" required>
 
-                <input type="password" name="password" placeholder="Password" class="series-search" required>
+                <input type="password" name="password" placeholder="{{ _('Password') }}" class="series-search" required>
 
-                <button type="submit" class="primary-btn">Login</button>
+                <button type="submit" class="primary-btn">{{ _('Login') }}</button>
 
 
             </form>
@@ -82,7 +82,7 @@
     </section>
 
     <footer class="footer">
-        <p>Copyright &copy; MySeries 2024</p>
+        <p>{{ _('Copyright') }} &copy; MySeries 2024</p>
     </footer>
 
 </body>

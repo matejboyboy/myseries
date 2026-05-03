@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Register</title>
+    <title>{{ _('Register') }}</title>
 </head>
 
-<body class="homepage {{ current_theme | default('light') }}-theme"></body>
+<body class="homepage {{ current_theme | default('light') }}-theme">
 
     <!-- ===== HEADER ===== -->
     <header>
@@ -36,17 +36,17 @@
 
             <!-- BOTTOM ROW -->
             <div class="nav_bottom_row">
-                <a href="/">Home</a>
-                <a href="/series">Series</a>
+                <a href="/">{{ _('Home') }}</a>
+                <a href="/series">{{ _('Series') }}</a>
 
                 {% if session.get('username') %}
-                <a href="/my_series">My Series</a>
+                <a href="/my_series">{{ _('My Series') }}</a>
                 {% endif %}
-                <a href="/about_us">About us</a>
+                <a href="/about_us">{{ _('About us') }}</a>
 
                 {% if not session.get('username') %}
-                <a href="/register">Register</a>
-                <a href="/login">Login</a>
+                <a href="/register">{{ _('Register') }}</a>
+                <a href="/login">{{ _('Login') }}</a>
                 {% endif %}
             </div>
         </nav>
@@ -56,7 +56,7 @@
     <!-- ===== REGISTER FORM ===== -->
     <section class="series-list">
 
-        <h2 class="home_podnaslov">Create Account</h2>
+        <h2 class="home_podnaslov">{{ _('Create Account') }}</h2>
 
         <div class="form-card">
 
@@ -65,20 +65,20 @@
                 <!-- FLASH MESSAGES -->
                 <div id="flash-messages">
                     {% for category, msg in get_flashed_messages(with_categories=true) %}
-                    <div class="flash {{ category }}">{{ msg }}</div>
+                    <div class="flash {{ category }}">{{ _(msg) }}</div>
                     {% endfor %}
                 </div>
 
                 <div style="display:flex; flex-direction:column; gap:15px;">
 
-                    <input type="text" name="username" placeholder="Username" required minlength="3"
+                    <input type="text" name="username" placeholder="{{ _('Username') }}" required minlength="3"
                         class="series-search" style="width:100%;">
 
-                    <input type="password" name="password" placeholder="Password" required minlength="6"
+                    <input type="password" name="password" placeholder="{{ _('Password') }}" required minlength="6"
                         class="series-search" style="width:100%;">
 
                     <button type="submit" class="primary-btn">
-                        Create Account
+                        {{ _('Create Account') }}
                     </button>
 
                 </div>
@@ -89,15 +89,15 @@
 
         <!-- LINKS -->
         <div class="filters-row" style="justify-content:center; margin-top:30px;">
-            <a href="/" class="series-link">Home</a>
-            <a href="/login" class="series-link">Already have an account?</a>
+            <a href="/" class="series-link">{{ _('Home') }}</a>
+            <a href="/login" class="series-link">{{ _('Already have an account?') }}</a>
         </div>
 
     </section>
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <p>Copyright &copy; MySeries 2024</p>
+        <p>{{ _('Copyright') }} &copy; MySeries 2024</p>
     </footer>
 
 </body>

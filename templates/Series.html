@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>All Series</title>
+    <title>{{ _('All Series') }}</title>
 </head>
 
 <body class="homepage {{ current_theme | default('light') }}-theme">
 
-    <!-- ===== HEADER (UNCHANGED) ===== -->
+    <!-- ===== HEADER ===== -->
     <header>
         <nav class="home_nav">
             <!-- TOP ROW -->
@@ -40,17 +40,17 @@
 
             <!-- BOTTOM ROW -->
             <div class="nav_bottom_row">
-                <a href="/">Home</a>
-                <a href="/series">Series</a>
+                <a href="/">{{ _('Home') }}</a>
+                <a href="/series">{{ _('Series') }}</a>
 
                 {% if session.get('username') %}
-                <a href="/my_series">My Series</a>
+                <a href="/my_series">{{ _('My Series') }}</a>
                 {% endif %}
-                <a href="/about_us">About us</a>
+                <a href="/about_us">{{ _('About us') }}</a>
 
                 {% if not session.get('username') %}
-                <a href="/register">Register</a>
-                <a href="/login">Login</a>
+                <a href="/register">{{ _('Register') }}</a>
+                <a href="/login">{{ _('Login') }}</a>
                 {% endif %}
             </div>
         </nav>
@@ -60,16 +60,16 @@
     <!-- ===== SERIES LIST ===== -->
     <section class="series-list">
 
-        <h2 class="home_podnaslov">All Series</h2>
+        <h2 class="home_podnaslov">{{ _('All Series') }}</h2>
         <div class="filters-row">
             <!-- SEARCH -->
-            <input type="text" id="seriesSearch" placeholder="Search series..." class="series-search">
+            <input type="text" id="seriesSearch" placeholder="{{ _('Search series...') }}" class="series-search">
 
             <!-- RATING FILTER -->
             <div class="custom-select" id="ratingFilter">
-                <div class="select-selected">Rating</div>
+                <div class="select-selected">{{ _('Rating') }}</div>
                 <div class="select-options">
-                    <div data-value="">Rating</div>
+                    <div data-value="">{{ _('Rating') }}</div>
                     <div data-value="tv-y">TV-Y</div>
                     <div data-value="tv-y7">TV-Y7</div>
                     <div data-value="tv-g">TV-G</div>
@@ -80,82 +80,80 @@
             </div>
 
             <div class="custom-select genre-button" id="genreFilter">
-                <div class="select-selected">Genres</div>
+                <div class="select-selected">{{ _('Genres') }}</div>
 
                 <!-- FLOATING GENRE PANEL -->
                 <div id="genreModal" class="genre-modal">
                     <div class="genre-modal-content">
 
                         <div class="genre-modal-header">
-                            <h3>Select Genres</h3>
+                            <h3>{{ _('Select Genres') }}</h3>
                             <button id="closeGenreModal">&times;</button>
                         </div>
 
                         <div class="genre-grid">
 
                             <!-- BIG FULL GENRE LIST -->
-                            <label><input type="checkbox" value="action"> Action</label>
-                            <label><input type="checkbox" value="horror"> Horror</label>
-                            <label><input type="checkbox" value="dark fantasy"> Dark Fantasy</label>
-                            <label><input type="checkbox" value="adventure"> Adventure</label>
-                            <label><input type="checkbox" value="fantasy"> Fantasy</label>
-                            <label><input type="checkbox" value="comedy"> Comedy</label>
-                            <label><input type="checkbox" value="supernatural"> Supernatural</label>
-                            <label><input type="checkbox" value="sci-fi"> Sci-Fi</label>
-                            <label><input type="checkbox" value="crime"> Crime</label>
-                            <label><input type="checkbox" value="drama"> Drama</label>
-                            <label><input type="checkbox" value="cyberpunk"> Cyberpunk</label>
-                            <label><input type="checkbox" value="thriller"> Thriller</label>
-                            <label><input type="checkbox" value="spy"> Spy</label>
-                            <label><input type="checkbox" value="superhero"> SuperHero</label>
-                            <label><input type="checkbox" value="romance"> Romance</label>
-                            <label><input type="checkbox" value="military"> Military</label>
-                            <label><input type="checkbox" value="business"> Business</label>
-                            <label><input type="checkbox" value="school"> School</label>
-                            <label><input type="checkbox" value="historical"> Historical</label>
-                            <label><input type="checkbox" value="epic"> Epic</label>
-                            <label><input type="checkbox" value="harem"> Harem</label>
-                            <label><input type="checkbox" value="slice of life"> Slice of Life</label>
-                            <label><input type="checkbox" value="workplace"> Workplace</label>
-                            <label><input type="checkbox" value="psychological"> Psychological</label>
-                            <label><input type="checkbox" value="mystery"> Mystery</label>
-                            <label><input type="checkbox" value="legal"> Legal</label>
-                            <label><input type="checkbox" value="music"> Music</label>
-                            <label><input type="checkbox" value="sports"> Sports</label>
-                            <label><input type="checkbox" value="magic"> Magic</label>
-                            <label><input type="checkbox" value="soccer"> Soccer</label>
-                            <label><input type="checkbox" value="family"> Family</label>
-                            <label><input type="checkbox" value="animation"> Animation</label>
-                            <label><input type="checkbox" value="revenge"> Revenge</label>
-
+                            <label><input type="checkbox" value="action"> {{ _('Action') }}</label>
+                            <label><input type="checkbox" value="horror"> {{ _('Horror') }}</label>
+                            <label><input type="checkbox" value="dark fantasy"> {{ _('Dark Fantasy') }}</label>
+                            <label><input type="checkbox" value="adventure"> {{ _('Adventure') }}</label>
+                            <label><input type="checkbox" value="fantasy"> {{ _('Fantasy') }}</label>
+                            <label><input type="checkbox" value="comedy"> {{ _('Comedy') }}</label>
+                            <label><input type="checkbox" value="supernatural"> {{ _('Supernatural') }}</label>
+                            <label><input type="checkbox" value="sci-fi"> {{ _('Sci-Fi') }}</label>
+                            <label><input type="checkbox" value="crime"> {{ _('Crime') }}</label>
+                            <label><input type="checkbox" value="drama"> {{ _('Drama') }}</label>
+                            <label><input type="checkbox" value="cyberpunk"> {{ _('Cyberpunk') }}</label>
+                            <label><input type="checkbox" value="thriller"> {{ _('Thriller') }}</label>
+                            <label><input type="checkbox" value="spy"> {{ _('Spy') }}</label>
+                            <label><input type="checkbox" value="superhero"> {{ _('SuperHero') }}</label>
+                            <label><input type="checkbox" value="romance"> {{ _('Romance') }}</label>
+                            <label><input type="checkbox" value="military"> {{ _('Military') }}</label>
+                            <label><input type="checkbox" value="business"> {{ _('Business') }}</label>
+                            <label><input type="checkbox" value="school"> {{ _('School') }}</label>
+                            <label><input type="checkbox" value="historical"> {{ _('Historical') }}</label>
+                            <label><input type="checkbox" value="epic"> {{ _('Epic') }}</label>
+                            <label><input type="checkbox" value="harem"> {{ _('Harem') }}</label>
+                            <label><input type="checkbox" value="slice of life"> {{ _('Slice of Life') }}</label>
+                            <label><input type="checkbox" value="workplace"> {{ _('Workplace') }}</label>
+                            <label><input type="checkbox" value="psychological"> {{ _('Psychological') }}</label>
+                            <label><input type="checkbox" value="mystery"> {{ _('Mystery') }}</label>
+                            <label><input type="checkbox" value="legal"> {{ _('Legal') }}</label>
+                            <label><input type="checkbox" value="music"> {{ _('Music') }}</label>
+                            <label><input type="checkbox" value="sports"> {{ _('Sports') }}</label>
+                            <label><input type="checkbox" value="magic"> {{ _('Magic') }}</label>
+                            <label><input type="checkbox" value="soccer"> {{ _('Soccer') }}</label>
+                            <label><input type="checkbox" value="family"> {{ _('Family') }}</label>
+                            <label><input type="checkbox" value="animation"> {{ _('Animation') }}</label>
+                            <label><input type="checkbox" value="revenge"> {{ _('Revenge') }}</label>
 
                         </div>
 
-                        <button id="applyGenres" class="primary-btn">Apply Filters</button>
+                        <button id="applyGenres" class="primary-btn">{{ _('Apply Filters') }}</button>
 
                     </div>
                 </div>
             </div>
 
-
-
             <!-- SOURCE FILTER -->
             <div class="custom-select" id="sourceFilter">
-                <div class="select-selected">Source</div>
+                <div class="select-selected">{{ _('Source') }}</div>
                 <div class="select-options">
-                    <div data-value="">All Sources</div>
-                    <div data-value="web manga">Web Manga</div>
-                    <div data-value="original">Original</div>
-                    <div data-value="light novel">Light Novel</div>
-                    <div data-value="manga">Manga</div>
-                    <div data-value="game">Game</div>
-                    <div data-value="novel">Novel</div>
-                    <div data-value="comics">Comics</div>
-                    <div data-value="webtoon">Webtoon</div>
-                    <div data-value="web novel">Web Novel</div>
+                    <div data-value="">{{ _('All Sources') }}</div>
+                    <div data-value="web manga">{{ _('Web Manga') }}</div>
+                    <div data-value="original">{{ _('Original') }}</div>
+                    <div data-value="light novel">{{ _('Light Novel') }}</div>
+                    <div data-value="manga">{{ _('Manga') }}</div>
+                    <div data-value="game">{{ _('Game') }}</div>
+                    <div data-value="novel">{{ _('Novel') }}</div>
+                    <div data-value="comics">{{ _('Comics') }}</div>
+                    <div data-value="webtoon">{{ _('Webtoon') }}</div>
+                    <div data-value="web novel">{{ _('Web Novel') }}</div>
                 </div>
             </div>
         </div>
+        
         {% for s in series %}
         <a href="{{ url_for('series_info', series_id=s.id) }}" class="series-link">
             <div class="series-row" data-name="{{ s.name | lower }}" data-rating="{{ s.rating}}"
@@ -167,93 +165,91 @@
 
                 <div class="series-info">
                     <h3 class="series-title" data-name="{{ s.name | lower }}">{{ s.name }}</h3>
-                    <p><strong>Genre:</strong>
+                    <p><strong>{{ _('Genre:') }}</strong>
                         <span class="genres">
                             {% if s.genre %}
                             {% for genre in s.genre.split(',') %}
                             <span class="genre-tag" data-genre="{{ genre.strip() }}">
-                                {{ genre.strip() }}
+                                {{ _(genre.strip()) }}
                             </span>
                             {% endfor %}
                             {% else %}
-                            N/A
+                            {{ _('N/A') }}
                             {% endif %}
                         </span>
                     </p>
-                    <p class="series-meta"><strong>Episodes:</strong> {{ s.episodes }}</p>
-                    <p class="series-meta"><strong>Duration:</strong> {{ s.duration }} min</p>
-                    <p class="series-meta"><strong>Rating:</strong> {{ s.rating or 'N/A'}}</p>
-                    <p class="series-meta"><strong>Aired:</strong> {{ s.aired or 'N/A'}} – {{ s.endedairing or 'N/A'}}
-                    </p>
+                    <p class="series-meta"><strong>{{ _('Episodes:') }}</strong> {{ s.episodes }}</p>
+                    <p class="series-meta"><strong>{{ _('Duration:') }}</strong> {{ s.duration }} {{ _('min') }}</p>
+                    <p class="series-meta"><strong>{{ _('Rating:') }}</strong> {{ s.rating or _('N/A') }}</p>
+                    <p class="series-meta"><strong>{{ _('Aired:') }}</strong> {{ s.aired or _('N/A') }} – {{ s.endedairing or _('N/A') }}</p>
                 </div>
             </div>
         </a>
         {% endfor %}
     </section>
 
-
-    <!-- ===== FOOTER (UNCHANGED) ===== -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <p>Copyright &copy; MySeries 2024</p>
+        <p>{{ _('Copyright') }} &copy; MySeries 2024</p>
     </footer>
     <script src="{{ url_for('static', filename='JAVASCRIPT/JS.js') }}"></script>
 </body>
 <script>
 const genreDescriptions = {
     // Action & Combat
-    "action": "Fast-paced stories driven by physical conflict, battles, and high-energy sequences.",
-    "martial arts": "Focused on hand-to-hand combat, traditional fighting styles, and discipline.",
-    "mecha": "Features giant robots, cyborgs, and highly advanced mechanical warfare.",
+    "action": "{{ _('Fast-paced stories driven by physical conflict, battles, and high-energy sequences.') }}",
+    "martial arts": "{{ _('Focused on hand-to-hand combat, traditional fighting styles, and discipline.') }}",
+    "mecha": "{{ _('Features giant robots, cyborgs, and highly advanced mechanical warfare.') }}",
     
     // Fantasy & Supernatural
-    "fantasy": "Stories featuring magic, mythical creatures, and imaginative worlds.",
-    "dark fantasy": "Fantasy with darker, mature themes, moral ambiguity, and grim worlds.",
-    "supernatural": "Involving paranormal forces, spirits, vampires, or unexplained phenomena.",
-    "magic": "Stories where intricate magical systems and spells play a major role.",
-    "isekai": "Characters are transported, reborn, or trapped in a parallel universe or game world.",
-    "xianxia": "Chinese high fantasy featuring immortal cultivation, gods, and cosmic magic.",
-    "wuxia": "Chinese martial arts fiction focusing on earthly warriors, chi, and honor.",
+    "fantasy": "{{ _('Stories featuring magic, mythical creatures, and imaginative worlds.') }}",
+    "dark fantasy": "{{ _('Fantasy with darker, mature themes, moral ambiguity, and grim worlds.') }}",
+    "supernatural": "{{ _('Involving paranormal forces, spirits, vampires, or unexplained phenomena.') }}",
+    "magic": "{{ _('Stories where intricate magical systems and spells play a major role.') }}",
+    "isekai": "{{ _('Characters are transported, reborn, or trapped in a parallel universe or game world.') }}",
+    "xianxia": "{{ _('Chinese high fantasy featuring immortal cultivation, gods, and cosmic magic.') }}",
+    "wuxia": "{{ _('Chinese martial arts fiction focusing on earthly warriors, chi, and honor.') }}",
     
     // Sci-Fi & Speculative
-    "sci-fi": "Explores futuristic concepts, science, technology, and space exploration.",
-    "cyberpunk": "Futuristic worlds blending advanced technology with societal decay and corporate control.",
-    "post-apocalyptic": "Set in a world struggling to survive after a global disaster or collapse.",
-    "time travel": "Characters leap forward or backward through time to alter history or their fate.",
-    "system": "Characters interact with a video-game-like interface granting them quests and stats.",
-    "litrpg": "A literary genre blending narrative fiction with RPG mechanics like leveling up.",
+    "sci-fi": "{{ _('Explores futuristic concepts, science, technology, and space exploration.') }}",
+    "cyberpunk": "{{ _('Futuristic worlds blending advanced technology with societal decay and corporate control.') }}",
+    "post-apocalyptic": "{{ _('Set in a world struggling to survive after a global disaster or collapse.') }}",
+    "time travel": "{{ _('Characters leap forward or backward through time to alter history or their fate.') }}",
+    "system": "{{ _('Characters interact with a video-game-like interface granting them quests and stats.') }}",
+    "litrpg": "{{ _('A literary genre blending narrative fiction with RPG mechanics like leveling up.') }}",
     
     // Drama, Thriller & Horror
-    "drama": "Character-driven stories emphasizing emotional depth, conflict, and realism.",
-    "horror": "Designed to evoke fear, dread, and tension, often exploring dark or disturbing themes.",
-    "thriller": "Built on intense suspense, tension, high stakes, and psychological pressure.",
-    "mystery": "Driven by puzzles, secrets, crime-solving, and investigations.",
-    "psychological": "Explores the mind, fragile mental states, emotional conflict, and manipulation.",
-    "revenge": "Driven by retaliation, ruthless justice, or deeply personal vendettas.",
-    "crime": "Centered on criminal acts, detective investigations, or underworld themes.",
-    "spy": "Focused on espionage, secret missions, covert operations, and global threats.",
+    "drama": "{{ _('Character-driven stories emphasizing emotional depth, conflict, and realism.') }}",
+    "horror": "{{ _('Designed to evoke fear, dread, and tension, often exploring dark or disturbing themes.') }}",
+    "thriller": "{{ _('Built on intense suspense, tension, high stakes, and psychological pressure.') }}",
+    "mystery": "{{ _('Driven by puzzles, secrets, crime-solving, and investigations.') }}",
+    "psychological": "{{ _('Explores the mind, fragile mental states, emotional conflict, and manipulation.') }}",
+    "revenge": "{{ _('Driven by retaliation, ruthless justice, or deeply personal vendettas.') }}",
+    "crime": "{{ _('Centered on criminal acts, detective investigations, or underworld themes.') }}",
+    "spy": "{{ _('Focused on espionage, secret missions, covert operations, and global threats.') }}",
     
     // Romance & Social
-    "romance": "Centered on love, developing relationships, and emotional connections.",
-    "harem": "One central character is surrounded by three or more romantic interests.",
-    "comedy": "Lighthearted narratives intended to entertain, amuse, and trigger laughter.",
-    "slice of life": "Depicts everyday experiences, mundane routines, and realistic situations.",
-    "school": "Set primarily in academic environments focusing on student life and youth.",
-    "workplace": "Focused on adult professional environments, career struggles, and office dynamics.",
-    "family": "Designed around family relationships, parenting, and household dynamics.",
+    "romance": "{{ _('Centered on love, developing relationships, and emotional connections.') }}",
+    "harem": "{{ _('One central character is surrounded by three or more romantic interests.') }}",
+    "comedy": "{{ _('Lighthearted narratives intended to entertain, amuse, and trigger laughter.') }}",
+    "slice of life": "{{ _('Depicts everyday experiences, mundane routines, and realistic situations.') }}",
+    "school": "{{ _('Set primarily in academic environments focusing on student life and youth.') }}",
+    "workplace": "{{ _('Focused on adult professional environments, career struggles, and office dynamics.') }}",
+    "family": "{{ _('Designed around family relationships, parenting, and household dynamics.') }}",
     
     // Specific Themes
-    "adventure": "Focused on grand journeys, exploration, and exciting unpredictable experiences.",
-    "superhero": "Featuring heroes with extraordinary abilities protecting society from villains.",
-    "satire": "Uses humor, irony, or exaggeration to critique and mock societal flaws or individuals.",
-    "military": "Involving warfare, soldiers, strategy, and intense combat scenarios.",
-    "business": "Stories revolving around corporate life, economics, strategy, and financial ambition.",
-    "historical": "Based on actual past events, periods, or historical civilizations.",
-    "epic": "Large-scale narratives with grand conflicts, massive casts, and sweeping scope.",
-    "legal": "Centered on law, intense trials, lawyers, and courtroom drama.",
-    "music": "Strongly tied to musical themes, bands, idols, or instrumental performance.",
-    "sports": "Focused on athletic competition, teamwork, tournaments, and physical growth.",
-    "soccer": "Centered specifically on football/soccer themes and championships.",
-    "animation": "Animated storytelling across various themes and styles."
+    "adventure": "{{ _('Focused on grand journeys, exploration, and exciting unpredictable experiences.') }}",
+    "superhero": "{{ _('Featuring heroes with extraordinary abilities protecting society from villains.') }}",
+    "satire": "{{ _('Uses humor, irony, or exaggeration to critique and mock societal flaws or individuals.') }}",
+    "military": "{{ _('Involving warfare, soldiers, strategy, and intense combat scenarios.') }}",
+    "business": "{{ _('Stories revolving around corporate life, economics, strategy, and financial ambition.') }}",
+    "historical": "{{ _('Based on actual past events, periods, or historical civilizations.') }}",
+    "epic": "{{ _('Large-scale narratives with grand conflicts, massive casts, and sweeping scope.') }}",
+    "legal": "{{ _('Centered on law, intense trials, lawyers, and courtroom drama.') }}",
+    "music": "{{ _('Strongly tied to musical themes, bands, idols, or instrumental performance.') }}",
+    "sports": "{{ _('Focused on athletic competition, teamwork, tournaments, and physical growth.') }}",
+    "soccer": "{{ _('Centered specifically on football/soccer themes and championships.') }}",
+    "animation": "{{ _('Animated storytelling across various themes and styles.') }}"
 };
 
 document.querySelectorAll(".genre-tag").forEach(tag => {
@@ -264,6 +260,5 @@ document.querySelectorAll(".genre-tag").forEach(tag => {
     }
 });
 </script>
-
 
 </html>

@@ -38,24 +38,24 @@
 
             <!-- BOTTOM ROW -->
             <div class="nav_bottom_row">
-                <a href="/">Home</a>
-                <a href="/series">Series</a>
+                <a href="/">{{ _('Home') }}</a>
+                <a href="/series">{{ _('Series') }}</a>
 
                 {% if session.get('username') %}
-                <a href="/my_series">My Series</a>
+                <a href="/my_series">{{ _('My Series') }}</a>
                 {% endif %}
-                <a href="/about_us">About us</a>
+                <a href="/about_us">{{ _('About us') }}</a>
 
                 {% if not session.get('username') %}
-                <a href="/register">Register</a>
-                <a href="/login">Login</a>
+                <a href="/register">{{ _('Register') }}</a>
+                <a href="/login">{{ _('Login') }}</a>
                 {% endif %}
             </div>
         </nav>
     </header>
     <div class="back-bar">
         <button onclick="history.back()" class="back-btn">
-            ← Back
+            ← {{ _('Back') }}
         </button>
     </div>
 
@@ -73,41 +73,50 @@
             <div class="series-info-details">
                 <h2>{{ series.name }}</h2>
 
-                <p><strong>Genre:</strong>
+                <p><strong>{{ _('Genre:') }}</strong>
                     <span class="genres">
                         {% if series.genre %}
                         {% for genre in series.genre.split(',') %}
                         <span class="genre-tag" data-genre="{{ genre.strip() }}">
-                            {{ genre.strip() }}
+                            {{ _(genre.strip()) }}
                         </span>
                         {% endfor %}
                         {% else %}
-                        N/A
+                        {{ _('N/A') }}
                         {% endif %}
                     </span>
                 </p>
 
                 {% if user_data %}
                 <p>
-                    <strong>Your Rating:</strong>
-                    ⭐ {{ user_data.rating or 'Not rated' }}/10
+                    <strong>{{ _('Your Rating:') }}</strong>
+                    ⭐ {{ user_data.rating or _('Not rated') }}/10
                 </p>
 
+                <!-- Status translation dictionary -->
+                {% set statuses = {
+                    "plan_to_watch": _("Plan to watch"),
+                    "watching": _("Watching"),
+                    "completed": _("Completed"),
+                    "on_hold": _("On hold"),
+                    "dropped": _("Dropped")
+                } %}
+
                 <p>
-                    <strong>Your Status:</strong>
-                    {{ user_data.status.replace('_', ' ').title() }}
+                    <strong>{{ _('Your Status:') }}</strong>
+                    {{ statuses[user_data.status] }}
                 </p>
                 {% endif %}
-                <p><strong>Episodes:</strong> {{ series.episodes }}</p>
-                <p><strong>Duration:</strong> {{ series.duration }} min</p>
-                <p><strong>Source:</strong> {{ series.source or 'N/A'}}</p>
-                <p><strong>Aired:</strong> {{ series.aired or 'N/A'}}{% if series.endedairing %} – {{
-                    series.endedairing or 'N/A' }}{%
+                <p><strong>{{ _('Episodes:') }}</strong> {{ series.episodes }}</p>
+                <p><strong>{{ _('Duration:') }}</strong> {{ series.duration }} {{ _('min') }}</p>
+                <p><strong>{{ _('Source:') }}</strong> {{ series.source or _('N/A')}}</p>
+                <p><strong>{{ _('Aired:') }}</strong> {{ series.aired or _('N/A')}}{% if series.endedairing %} – {{
+                    series.endedairing or _('N/A') }}{%
                     endif %}</p>
                 <hr style="margin:30px 0; opacity:0.2;">
 
                 <!-- SERIES SUMMARY -->
-                <h3>Summary</h3>
+                <h3>{{ _('Summary') }}</h3>
                 <p>{{ series.Summary }}</p>
                 <hr style="margin:30px 0; opacity:0.2;">
 
@@ -116,7 +125,7 @@
                 <form method="POST" action="/add_to_list">
                     <input type="hidden" name="series_id" value="{{ series.id }}">
                     <div class="form-group">
-                        <label>Rating</label>
+                        <label>{{ _('Rating') }}</label>
 
                         <div class="rating-bar">
                             {% for i in range(1, 11) %}
@@ -128,44 +137,44 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Status</label>
+                        <label>{{ _('Status') }}</label>
 
                         <select name="status" class="status-select premium-select">
                             <option value="plan_to_watch" {% if user_data and user_data.status=='plan_to_watch'
                                 %}selected{% endif %}>
-                                📌 Plan to watch
+                                📌 {{ _('Plan to watch') }}
                             </option>
 
                             <option value="watching" {% if user_data and user_data.status=='watching' %}selected{% endif
                                 %}>
-                                👀 Watching
+                                👀 {{ _('Watching') }}
                             </option>
 
                             <option value="completed" {% if user_data and user_data.status=='completed' %}selected{%
                                 endif %}>
-                                ✅ Completed
+                                ✅ {{ _('Completed') }}
                             </option>
 
                             <option value="on_hold" {% if user_data and user_data.status=='on_hold' %}selected{% endif
                                 %}>
-                                ⏸ On hold
+                                ⏸ {{ _('On hold') }}
                             </option>
 
                             <option value="dropped" {% if user_data and user_data.status=='dropped' %}selected{% endif
                                 %}>
-                                ❌ Dropped
+                                ❌ {{ _('Dropped') }}
                             </option>
                         </select>
                     </div>
 
-                    <button type="submit" class="primary-action-btn">Save</button>
+                    <button type="submit" class="primary-action-btn">{{ _('Save') }}</button>
                 </form>
 
                 {% else %}
 
                 <p style="color:#ccc; margin-top:20px;">
-                    <a href="/login" style="color:#a0a0ff;">Log in</a>
-                    to rate and save this series
+                    <a href="/login" style="color:#a0a0ff;">{{ _('Log in') }}</a>
+                    {{ _('to rate and save this series') }}
                 </p>
 
                 {% endif %}
@@ -177,7 +186,7 @@
     </section>
 
     <footer class="footer">
-        <p>Copyright © MySeries 2024</p>
+        <p>{{ _('Copyright') }} © MySeries 2024</p>
     </footer>
 
 </body>
@@ -185,59 +194,59 @@
 <script>
 const genreDescriptions = {
     // Action & Combat
-    "action": "Fast-paced stories driven by physical conflict, battles, and high-energy sequences.",
-    "martial arts": "Focused on hand-to-hand combat, traditional fighting styles, and discipline.",
-    "mecha": "Features giant robots, cyborgs, and highly advanced mechanical warfare.",
+    "action": "{{ _('Fast-paced stories driven by physical conflict, battles, and high-energy sequences.') }}",
+    "martial arts": "{{ _('Focused on hand-to-hand combat, traditional fighting styles, and discipline.') }}",
+    "mecha": "{{ _('Features giant robots, cyborgs, and highly advanced mechanical warfare.') }}",
     
     // Fantasy & Supernatural
-    "fantasy": "Stories featuring magic, mythical creatures, and imaginative worlds.",
-    "dark fantasy": "Fantasy with darker, mature themes, moral ambiguity, and grim worlds.",
-    "supernatural": "Involving paranormal forces, spirits, vampires, or unexplained phenomena.",
-    "magic": "Stories where intricate magical systems and spells play a major role.",
-    "isekai": "Characters are transported, reborn, or trapped in a parallel universe or game world.",
-    "xianxia": "Chinese high fantasy featuring immortal cultivation, gods, and cosmic magic.",
-    "wuxia": "Chinese martial arts fiction focusing on earthly warriors, chi, and honor.",
+    "fantasy": "{{ _('Stories featuring magic, mythical creatures, and imaginative worlds.') }}",
+    "dark fantasy": "{{ _('Fantasy with darker, mature themes, moral ambiguity, and grim worlds.') }}",
+    "supernatural": "{{ _('Involving paranormal forces, spirits, vampires, or unexplained phenomena.') }}",
+    "magic": "{{ _('Stories where intricate magical systems and spells play a major role.') }}",
+    "isekai": "{{ _('Characters are transported, reborn, or trapped in a parallel universe or game world.') }}",
+    "xianxia": "{{ _('Chinese high fantasy featuring immortal cultivation, gods, and cosmic magic.') }}",
+    "wuxia": "{{ _('Chinese martial arts fiction focusing on earthly warriors, chi, and honor.') }}",
     
     // Sci-Fi & Speculative
-    "sci-fi": "Explores futuristic concepts, science, technology, and space exploration.",
-    "cyberpunk": "Futuristic worlds blending advanced technology with societal decay and corporate control.",
-    "post-apocalyptic": "Set in a world struggling to survive after a global disaster or collapse.",
-    "time travel": "Characters leap forward or backward through time to alter history or their fate.",
-    "system": "Characters interact with a video-game-like interface granting them quests and stats.",
-    "litrpg": "A literary genre blending narrative fiction with RPG mechanics like leveling up.",
+    "sci-fi": "{{ _('Explores futuristic concepts, science, technology, and space exploration.') }}",
+    "cyberpunk": "{{ _('Futuristic worlds blending advanced technology with societal decay and corporate control.') }}",
+    "post-apocalyptic": "{{ _('Set in a world struggling to survive after a global disaster or collapse.') }}",
+    "time travel": "{{ _('Characters leap forward or backward through time to alter history or their fate.') }}",
+    "system": "{{ _('Characters interact with a video-game-like interface granting them quests and stats.') }}",
+    "litrpg": "{{ _('A literary genre blending narrative fiction with RPG mechanics like leveling up.') }}",
     
     // Drama, Thriller & Horror
-    "drama": "Character-driven stories emphasizing emotional depth, conflict, and realism.",
-    "horror": "Designed to evoke fear, dread, and tension, often exploring dark or disturbing themes.",
-    "thriller": "Built on intense suspense, tension, high stakes, and psychological pressure.",
-    "mystery": "Driven by puzzles, secrets, crime-solving, and investigations.",
-    "psychological": "Explores the mind, fragile mental states, emotional conflict, and manipulation.",
-    "revenge": "Driven by retaliation, ruthless justice, or deeply personal vendettas.",
-    "crime": "Centered on criminal acts, detective investigations, or underworld themes.",
-    "spy": "Focused on espionage, secret missions, covert operations, and global threats.",
+    "drama": "{{ _('Character-driven stories emphasizing emotional depth, conflict, and realism.') }}",
+    "horror": "{{ _('Designed to evoke fear, dread, and tension, often exploring dark or disturbing themes.') }}",
+    "thriller": "{{ _('Built on intense suspense, tension, high stakes, and psychological pressure.') }}",
+    "mystery": "{{ _('Driven by puzzles, secrets, crime-solving, and investigations.') }}",
+    "psychological": "{{ _('Explores the mind, fragile mental states, emotional conflict, and manipulation.') }}",
+    "revenge": "{{ _('Driven by retaliation, ruthless justice, or deeply personal vendettas.') }}",
+    "crime": "{{ _('Centered on criminal acts, detective investigations, or underworld themes.') }}",
+    "spy": "{{ _('Focused on espionage, secret missions, covert operations, and global threats.') }}",
     
     // Romance & Social
-    "romance": "Centered on love, developing relationships, and emotional connections.",
-    "harem": "One central character is surrounded by three or more romantic interests.",
-    "comedy": "Lighthearted narratives intended to entertain, amuse, and trigger laughter.",
-    "slice of life": "Depicts everyday experiences, mundane routines, and realistic situations.",
-    "school": "Set primarily in academic environments focusing on student life and youth.",
-    "workplace": "Focused on adult professional environments, career struggles, and office dynamics.",
-    "family": "Designed around family relationships, parenting, and household dynamics.",
+    "romance": "{{ _('Centered on love, developing relationships, and emotional connections.') }}",
+    "harem": "{{ _('One central character is surrounded by three or more romantic interests.') }}",
+    "comedy": "{{ _('Lighthearted narratives intended to entertain, amuse, and trigger laughter.') }}",
+    "slice of life": "{{ _('Depicts everyday experiences, mundane routines, and realistic situations.') }}",
+    "school": "{{ _('Set primarily in academic environments focusing on student life and youth.') }}",
+    "workplace": "{{ _('Focused on adult professional environments, career struggles, and office dynamics.') }}",
+    "family": "{{ _('Designed around family relationships, parenting, and household dynamics.') }}",
     
     // Specific Themes
-    "adventure": "Focused on grand journeys, exploration, and exciting unpredictable experiences.",
-    "superhero": "Featuring heroes with extraordinary abilities protecting society from villains.",
-    "satire": "Uses humor, irony, or exaggeration to critique and mock societal flaws or individuals.",
-    "military": "Involving warfare, soldiers, strategy, and intense combat scenarios.",
-    "business": "Stories revolving around corporate life, economics, strategy, and financial ambition.",
-    "historical": "Based on actual past events, periods, or historical civilizations.",
-    "epic": "Large-scale narratives with grand conflicts, massive casts, and sweeping scope.",
-    "legal": "Centered on law, intense trials, lawyers, and courtroom drama.",
-    "music": "Strongly tied to musical themes, bands, idols, or instrumental performance.",
-    "sports": "Focused on athletic competition, teamwork, tournaments, and physical growth.",
-    "soccer": "Centered specifically on football/soccer themes and championships.",
-    "animation": "Animated storytelling across various themes and styles."
+    "adventure": "{{ _('Focused on grand journeys, exploration, and exciting unpredictable experiences.') }}",
+    "superhero": "{{ _('Featuring heroes with extraordinary abilities protecting society from villains.') }}",
+    "satire": "{{ _('Uses humor, irony, or exaggeration to critique and mock societal flaws or individuals.') }}",
+    "military": "{{ _('Involving warfare, soldiers, strategy, and intense combat scenarios.') }}",
+    "business": "{{ _('Stories revolving around corporate life, economics, strategy, and financial ambition.') }}",
+    "historical": "{{ _('Based on actual past events, periods, or historical civilizations.') }}",
+    "epic": "{{ _('Large-scale narratives with grand conflicts, massive casts, and sweeping scope.') }}",
+    "legal": "{{ _('Centered on law, intense trials, lawyers, and courtroom drama.') }}",
+    "music": "{{ _('Strongly tied to musical themes, bands, idols, or instrumental performance.') }}",
+    "sports": "{{ _('Focused on athletic competition, teamwork, tournaments, and physical growth.') }}",
+    "soccer": "{{ _('Centered specifically on football/soccer themes and championships.') }}",
+    "animation": "{{ _('Animated storytelling across various themes and styles.') }}"
 };
 
 document.querySelectorAll(".genre-tag").forEach(tag => {
@@ -248,6 +257,5 @@ document.querySelectorAll(".genre-tag").forEach(tag => {
     }
 });
 </script>
-
 
 </html>
