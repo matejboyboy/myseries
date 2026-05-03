@@ -5,6 +5,7 @@ from datetime import date
 import os
 import psycopg2
 import psycopg2.extras
+from flask_babel import Babel, _
 
 
 app = Flask(__name__)
@@ -12,10 +13,19 @@ app.secret_key = "some-long-random-string"
 
 UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'PROFILE_PIC')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'sl'] # English and Slovenian
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def get_locale():
+    # If the user selected a language, use it. Otherwise, default to English.
+    return session.get('language', 'en')
+
+babel = Babel(app, locale_selector=get_locale)
+
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -480,6 +490,15 @@ def my_series():
             s["user_score"] = int(s["user_score"])
 
     return render_template("my_series.html", user_series=user_series)
+
+
+@app.route('/set_language/<lang>')
+def set_language(lang):
+    if lang in app.config['BABEL_SUPPORTED_LOCALES']:
+        session['language'] = lang
+        # You could also update the user_info database table here, 
+        # similar to how you handle the color_theme!
+    return redirect(request.referrer or url_for('home'))
 
 
 
