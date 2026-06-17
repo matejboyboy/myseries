@@ -1,0 +1,794 @@
+# English translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-06-17 18:54+0200\n"
+"PO-Revision-Date: 2026-06-17 19:02+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: templates/About_Us.html:8 templates/About_Us.html:68
+msgid "About Us"
+msgstr ""
+
+#: templates/About_Us.html:44 templates/HomePage.html:41
+#: templates/Series.html:43 templates/info.html:41 templates/login.html:42
+#: templates/my_series.html:44 templates/profile.html:42
+#: templates/register.html:39 templates/register.html:92
+msgid "Home"
+msgstr ""
+
+#: templates/About_Us.html:45 templates/HomePage.html:42
+#: templates/Series.html:44 templates/info.html:42 templates/login.html:43
+#: templates/my_series.html:45 templates/profile.html:43
+#: templates/register.html:40
+msgid "Series"
+msgstr ""
+
+#: templates/About_Us.html:52 templates/HomePage.html:45
+#: templates/Series.html:47 templates/info.html:45 templates/login.html:46
+#: templates/my_series.html:8 templates/my_series.html:48
+#: templates/my_series.html:64 templates/profile.html:46
+#: templates/register.html:43
+msgid "My Series"
+msgstr ""
+
+#: templates/About_Us.html:54 templates/HomePage.html:47
+#: templates/Series.html:49 templates/info.html:47 templates/login.html:48
+#: templates/my_series.html:50 templates/profile.html:48
+#: templates/register.html:45
+msgid "About us"
+msgstr ""
+
+#: templates/About_Us.html:57 templates/HomePage.html:50
+#: templates/Series.html:52 templates/info.html:50 templates/login.html:51
+#: templates/my_series.html:53 templates/profile.html:51
+#: templates/register.html:8 templates/register.html:48
+msgid "Register"
+msgstr ""
+
+#: templates/About_Us.html:58 templates/HomePage.html:51
+#: templates/Series.html:53 templates/info.html:51 templates/login.html:8
+#: templates/login.html:52 templates/login.html:61 templates/login.html:75
+#: templates/my_series.html:54 templates/profile.html:52
+#: templates/register.html:49
+msgid "Login"
+msgstr ""
+
+#: templates/About_Us.html:70
+msgid ""
+"Welcome to <strong>MySeries</strong> – your ultimate hub for discovering,"
+" tracking, and enjoying the\n"
+"            latest and greatest TV shows and anime. We’re a small but "
+"passionate team of enthusiasts who believe that\n"
+"            every series, from hidden gems to global hits, deserves to be"
+" seen."
+msgstr ""
+
+#: templates/About_Us.html:75
+msgid ""
+"Our mission is simple: to make your series-watching experience seamless "
+"and fun. Whether you’re\n"
+"            hunting for the next binge-worthy anime or keeping up with "
+"popular dramas, we provide the tools and\n"
+"            inspiration to explore your favorites."
+msgstr ""
+
+#: templates/About_Us.html:80
+msgid ""
+"At MySeries, we value quality, passion, and community. We constantly "
+"update our database with new\n"
+"            releases, detailed series info, and high-quality cover "
+"images. Our goal is to create a place where series\n"
+"            lovers can find everything they need, all in one spot."
+msgstr ""
+
+#: templates/About_Us.html:85
+msgid ""
+"Thank you for being part of our journey. Sit back, explore, and let "
+"MySeries help you find your next\n"
+"            favorite show!"
+msgstr ""
+
+#: templates/About_Us.html:92 templates/HomePage.html:178
+#: templates/Series.html:188 templates/info.html:189 templates/login.html:85
+#: templates/my_series.html:247 templates/profile.html:184
+#: templates/register.html:100
+msgid "Copyright"
+msgstr ""
+
+#: templates/HomePage.html:8
+msgid "HomePage"
+msgstr ""
+
+#: templates/HomePage.html:62
+msgid "Hot new series!"
+msgstr ""
+
+#: templates/HomePage.html:71
+msgid "Cover"
+msgstr ""
+
+#: templates/HomePage.html:76
+msgid "Episodes"
+msgstr ""
+
+#: templates/HomePage.html:77 templates/Series.html:177 templates/info.html:111
+msgid "min"
+msgstr ""
+
+#: templates/HomePage.html:78
+msgid "Unknown"
+msgstr ""
+
+#: templates/HomePage.html:97
+msgid "Newest Shows"
+msgstr ""
+
+#: templates/HomePage.html:117 templates/Series.html:111
+#: templates/my_series.html:113
+msgid "Romance"
+msgstr ""
+
+#: templates/HomePage.html:137 templates/Series.html:97
+#: templates/my_series.html:99
+msgid "Action"
+msgstr ""
+
+#: templates/HomePage.html:157 templates/Series.html:106
+#: templates/my_series.html:108
+msgid "Drama"
+msgstr ""
+
+#: templates/Series.html:8 templates/Series.html:63
+msgid "All Series"
+msgstr ""
+
+#: templates/Series.html:66
+msgid "Search series..."
+msgstr ""
+
+#: templates/Series.html:70 templates/Series.html:72 templates/info.html:128
+msgid "Rating"
+msgstr ""
+
+#: templates/Series.html:83 templates/my_series.html:85
+msgid "Genres"
+msgstr ""
+
+#: templates/Series.html:90 templates/my_series.html:92
+msgid "Select Genres"
+msgstr ""
+
+#: templates/Series.html:98 templates/my_series.html:100
+msgid "Horror"
+msgstr ""
+
+#: templates/Series.html:99 templates/my_series.html:101
+msgid "Dark Fantasy"
+msgstr ""
+
+#: templates/Series.html:100 templates/my_series.html:102
+msgid "Adventure"
+msgstr ""
+
+#: templates/Series.html:101 templates/my_series.html:103
+msgid "Fantasy"
+msgstr ""
+
+#: templates/Series.html:102 templates/my_series.html:104
+msgid "Comedy"
+msgstr ""
+
+#: templates/Series.html:103 templates/my_series.html:105
+msgid "Supernatural"
+msgstr ""
+
+#: templates/Series.html:104 templates/my_series.html:106
+msgid "Sci-Fi"
+msgstr ""
+
+#: templates/Series.html:105 templates/my_series.html:107
+msgid "Crime"
+msgstr ""
+
+#: templates/Series.html:107 templates/my_series.html:109
+msgid "Cyberpunk"
+msgstr ""
+
+#: templates/Series.html:108 templates/my_series.html:110
+msgid "Thriller"
+msgstr ""
+
+#: templates/Series.html:109 templates/my_series.html:111
+msgid "Spy"
+msgstr ""
+
+#: templates/Series.html:110 templates/my_series.html:112
+msgid "SuperHero"
+msgstr ""
+
+#: templates/Series.html:112 templates/my_series.html:114
+msgid "Military"
+msgstr ""
+
+#: templates/Series.html:113 templates/my_series.html:115
+msgid "Business"
+msgstr ""
+
+#: templates/Series.html:114 templates/my_series.html:116
+msgid "School"
+msgstr ""
+
+#: templates/Series.html:115 templates/my_series.html:117
+msgid "Historical"
+msgstr ""
+
+#: templates/Series.html:116 templates/my_series.html:118
+msgid "Epic"
+msgstr ""
+
+#: templates/Series.html:117 templates/my_series.html:119
+msgid "Harem"
+msgstr ""
+
+#: templates/Series.html:118 templates/my_series.html:120
+msgid "Slice of Life"
+msgstr ""
+
+#: templates/Series.html:119 templates/my_series.html:121
+msgid "Workplace"
+msgstr ""
+
+#: templates/Series.html:120 templates/my_series.html:122
+msgid "Psychological"
+msgstr ""
+
+#: templates/Series.html:121 templates/my_series.html:123
+msgid "Mystery"
+msgstr ""
+
+#: templates/Series.html:122 templates/my_series.html:124
+msgid "Legal"
+msgstr ""
+
+#: templates/Series.html:123 templates/my_series.html:125
+msgid "Music"
+msgstr ""
+
+#: templates/Series.html:124 templates/my_series.html:126
+msgid "Sports"
+msgstr ""
+
+#: templates/Series.html:125 templates/my_series.html:127
+msgid "Magic"
+msgstr ""
+
+#: templates/Series.html:126 templates/my_series.html:128
+msgid "Soccer"
+msgstr ""
+
+#: templates/Series.html:127 templates/my_series.html:129
+msgid "Family"
+msgstr ""
+
+#: templates/Series.html:128 templates/my_series.html:130
+msgid "Animation"
+msgstr ""
+
+#: templates/Series.html:129 templates/my_series.html:131
+msgid "Revenge"
+msgstr ""
+
+#: templates/Series.html:133 templates/my_series.html:135
+msgid "Apply Filters"
+msgstr ""
+
+#: templates/Series.html:141 templates/my_series.html:142
+msgid "Source"
+msgstr ""
+
+#: templates/Series.html:143 templates/my_series.html:144
+msgid "All Sources"
+msgstr ""
+
+#: templates/Series.html:144 templates/my_series.html:145
+msgid "Original"
+msgstr ""
+
+#: templates/Series.html:145 templates/my_series.html:146
+msgid "Game"
+msgstr ""
+
+#: templates/Series.html:146 templates/my_series.html:147
+msgid "Novel"
+msgstr ""
+
+#: templates/Series.html:147 templates/my_series.html:148
+msgid "Comics"
+msgstr ""
+
+#: templates/Series.html:163 templates/info.html:76
+#: templates/my_series.html:213
+msgid "Genre:"
+msgstr ""
+
+#: templates/Series.html:172 templates/Series.html:178
+#: templates/Series.html:179 templates/info.html:85 templates/info.html:112
+#: templates/info.html:113 templates/info.html:114 templates/my_series.html:222
+msgid "N/A"
+msgstr ""
+
+#: templates/Series.html:176 templates/info.html:110
+msgid "Episodes:"
+msgstr ""
+
+#: templates/Series.html:177 templates/info.html:111
+msgid "Duration:"
+msgstr ""
+
+#: templates/Series.html:178 templates/my_series.html:226
+msgid "Rating:"
+msgstr ""
+
+#: templates/Series.html:179 templates/info.html:113
+msgid "Aired:"
+msgstr ""
+
+#: templates/Series.html:195 templates/info.html:197
+#: templates/my_series.html:255
+msgid ""
+"Fast-paced stories driven by physical conflict, battles, and high-energy "
+"sequences."
+msgstr ""
+
+#: templates/Series.html:196 templates/info.html:198
+#: templates/my_series.html:256
+msgid ""
+"Focused on hand-to-hand combat, traditional fighting styles, and "
+"discipline."
+msgstr ""
+
+#: templates/Series.html:197 templates/info.html:199
+#: templates/my_series.html:257
+msgid "Features giant robots, cyborgs, and highly advanced mechanical warfare."
+msgstr ""
+
+#: templates/Series.html:200 templates/info.html:202
+#: templates/my_series.html:260
+msgid "Stories featuring magic, mythical creatures, and imaginative worlds."
+msgstr ""
+
+#: templates/Series.html:201 templates/info.html:203
+#: templates/my_series.html:261
+msgid "Fantasy with darker, mature themes, moral ambiguity, and grim worlds."
+msgstr ""
+
+#: templates/Series.html:202 templates/info.html:204
+#: templates/my_series.html:262
+msgid "Involving paranormal forces, spirits, vampires, or unexplained phenomena."
+msgstr ""
+
+#: templates/Series.html:203 templates/info.html:205
+#: templates/my_series.html:263
+msgid "Stories where intricate magical systems and spells play a major role."
+msgstr ""
+
+#: templates/Series.html:204 templates/info.html:206
+#: templates/my_series.html:264
+msgid ""
+"Characters are transported, reborn, or trapped in a parallel universe or "
+"game world."
+msgstr ""
+
+#: templates/Series.html:205 templates/info.html:207
+#: templates/my_series.html:265
+msgid ""
+"Chinese high fantasy featuring immortal cultivation, gods, and cosmic "
+"magic."
+msgstr ""
+
+#: templates/Series.html:206 templates/info.html:208
+#: templates/my_series.html:266
+msgid "Chinese martial arts fiction focusing on earthly warriors, chi, and honor."
+msgstr ""
+
+#: templates/Series.html:209 templates/info.html:211
+#: templates/my_series.html:269
+msgid "Explores futuristic concepts, science, technology, and space exploration."
+msgstr ""
+
+#: templates/Series.html:210 templates/info.html:212
+#: templates/my_series.html:270
+msgid ""
+"Futuristic worlds blending advanced technology with societal decay and "
+"corporate control."
+msgstr ""
+
+#: templates/Series.html:211 templates/info.html:213
+#: templates/my_series.html:271
+msgid "Set in a world struggling to survive after a global disaster or collapse."
+msgstr ""
+
+#: templates/Series.html:212 templates/info.html:214
+#: templates/my_series.html:272
+msgid ""
+"Characters leap forward or backward through time to alter history or "
+"their fate."
+msgstr ""
+
+#: templates/Series.html:213 templates/info.html:215
+#: templates/my_series.html:273
+msgid ""
+"Characters interact with a video-game-like interface granting them quests"
+" and stats."
+msgstr ""
+
+#: templates/Series.html:214 templates/info.html:216
+#: templates/my_series.html:274
+msgid ""
+"A literary genre blending narrative fiction with RPG mechanics like "
+"leveling up."
+msgstr ""
+
+#: templates/Series.html:217 templates/info.html:219
+#: templates/my_series.html:277
+msgid ""
+"Character-driven stories emphasizing emotional depth, conflict, and "
+"realism."
+msgstr ""
+
+#: templates/Series.html:218 templates/info.html:220
+#: templates/my_series.html:278
+msgid ""
+"Designed to evoke fear, dread, and tension, often exploring dark or "
+"disturbing themes."
+msgstr ""
+
+#: templates/Series.html:219 templates/info.html:221
+#: templates/my_series.html:279
+msgid ""
+"Built on intense suspense, tension, high stakes, and psychological "
+"pressure."
+msgstr ""
+
+#: templates/Series.html:220 templates/info.html:222
+#: templates/my_series.html:280
+msgid "Driven by puzzles, secrets, crime-solving, and investigations."
+msgstr ""
+
+#: templates/Series.html:221 templates/info.html:223
+#: templates/my_series.html:281
+msgid ""
+"Explores the mind, fragile mental states, emotional conflict, and "
+"manipulation."
+msgstr ""
+
+#: templates/Series.html:222 templates/info.html:224
+#: templates/my_series.html:282
+msgid "Driven by retaliation, ruthless justice, or deeply personal vendettas."
+msgstr ""
+
+#: templates/Series.html:223 templates/info.html:225
+#: templates/my_series.html:283
+msgid "Centered on criminal acts, detective investigations, or underworld themes."
+msgstr ""
+
+#: templates/Series.html:224 templates/info.html:226
+#: templates/my_series.html:284
+msgid ""
+"Focused on espionage, secret missions, covert operations, and global "
+"threats."
+msgstr ""
+
+#: templates/Series.html:227 templates/info.html:229
+#: templates/my_series.html:287
+msgid "Centered on love, developing relationships, and emotional connections."
+msgstr ""
+
+#: templates/Series.html:228 templates/info.html:230
+#: templates/my_series.html:288
+msgid "One central character is surrounded by three or more romantic interests."
+msgstr ""
+
+#: templates/Series.html:229 templates/info.html:231
+#: templates/my_series.html:289
+msgid ""
+"Lighthearted narratives intended to entertain, amuse, and trigger "
+"laughter."
+msgstr ""
+
+#: templates/Series.html:230 templates/info.html:232
+#: templates/my_series.html:290
+msgid "Depicts everyday experiences, mundane routines, and realistic situations."
+msgstr ""
+
+#: templates/Series.html:231 templates/info.html:233
+#: templates/my_series.html:291
+msgid "Set primarily in academic environments focusing on student life and youth."
+msgstr ""
+
+#: templates/Series.html:232 templates/info.html:234
+#: templates/my_series.html:292
+msgid ""
+"Focused on adult professional environments, career struggles, and office "
+"dynamics."
+msgstr ""
+
+#: templates/Series.html:233 templates/info.html:235
+#: templates/my_series.html:293
+msgid "Designed around family relationships, parenting, and household dynamics."
+msgstr ""
+
+#: templates/Series.html:236 templates/info.html:238
+#: templates/my_series.html:296
+msgid ""
+"Focused on grand journeys, exploration, and exciting unpredictable "
+"experiences."
+msgstr ""
+
+#: templates/Series.html:237 templates/info.html:239
+#: templates/my_series.html:297
+msgid ""
+"Featuring heroes with extraordinary abilities protecting society from "
+"villains."
+msgstr ""
+
+#: templates/Series.html:238 templates/info.html:240
+#: templates/my_series.html:298
+msgid ""
+"Uses humor, irony, or exaggeration to critique and mock societal flaws or"
+" individuals."
+msgstr ""
+
+#: templates/Series.html:239 templates/info.html:241
+#: templates/my_series.html:299
+msgid "Involving warfare, soldiers, strategy, and intense combat scenarios."
+msgstr ""
+
+#: templates/Series.html:240 templates/info.html:242
+#: templates/my_series.html:300
+msgid ""
+"Stories revolving around corporate life, economics, strategy, and "
+"financial ambition."
+msgstr ""
+
+#: templates/Series.html:241 templates/info.html:243
+#: templates/my_series.html:301
+msgid "Based on actual past events, periods, or historical civilizations."
+msgstr ""
+
+#: templates/Series.html:242 templates/info.html:244
+#: templates/my_series.html:302
+msgid ""
+"Large-scale narratives with grand conflicts, massive casts, and sweeping "
+"scope."
+msgstr ""
+
+#: templates/Series.html:243 templates/info.html:245
+#: templates/my_series.html:303
+msgid "Centered on law, intense trials, lawyers, and courtroom drama."
+msgstr ""
+
+#: templates/Series.html:244 templates/info.html:246
+#: templates/my_series.html:304
+msgid ""
+"Strongly tied to musical themes, bands, idols, or instrumental "
+"performance."
+msgstr ""
+
+#: templates/Series.html:245 templates/info.html:247
+#: templates/my_series.html:305
+msgid ""
+"Focused on athletic competition, teamwork, tournaments, and physical "
+"growth."
+msgstr ""
+
+#: templates/Series.html:246 templates/info.html:248
+#: templates/my_series.html:306
+msgid "Centered specifically on football/soccer themes and championships."
+msgstr ""
+
+#: templates/Series.html:247 templates/info.html:249
+#: templates/my_series.html:307
+msgid "Animated storytelling across various themes and styles."
+msgstr ""
+
+#: templates/info.html:58
+msgid "Back"
+msgstr ""
+
+#: templates/info.html:92
+msgid "Your Rating:"
+msgstr ""
+
+#: templates/info.html:93
+msgid "Not rated"
+msgstr ""
+
+#: templates/info.html:98 templates/info.html:145
+msgid "Plan to watch"
+msgstr ""
+
+#: templates/info.html:99 templates/info.html:150 templates/my_series.html:174
+#: templates/my_series.html:185
+msgid "Watching"
+msgstr ""
+
+#: templates/info.html:100 templates/info.html:155 templates/my_series.html:175
+#: templates/my_series.html:186
+msgid "Completed"
+msgstr ""
+
+#: templates/info.html:101 templates/info.html:160
+msgid "On hold"
+msgstr ""
+
+#: templates/info.html:102 templates/info.html:165 templates/my_series.html:178
+#: templates/my_series.html:189
+msgid "Dropped"
+msgstr ""
+
+#: templates/info.html:106
+msgid "Your Status:"
+msgstr ""
+
+#: templates/info.html:112
+msgid "Source:"
+msgstr ""
+
+#: templates/info.html:119
+msgid "Summary"
+msgstr ""
+
+#: templates/info.html:140 templates/my_series.html:171
+msgid "Status"
+msgstr ""
+
+#: templates/info.html:170
+msgid "Save"
+msgstr ""
+
+#: templates/info.html:176
+msgid "Log in"
+msgstr ""
+
+#: templates/info.html:177
+msgid "to rate and save this series"
+msgstr ""
+
+#: templates/login.html:71 templates/register.html:74
+msgid "Username"
+msgstr ""
+
+#: templates/login.html:73 templates/register.html:77
+msgid "Password"
+msgstr ""
+
+#: templates/my_series.html:69
+msgid "Search my series..."
+msgstr ""
+
+#: templates/my_series.html:72 templates/my_series.html:74
+msgid "TV Rating"
+msgstr ""
+
+#: templates/my_series.html:153
+msgid "Filter by Score"
+msgstr ""
+
+#: templates/my_series.html:155
+msgid "Any Score"
+msgstr ""
+
+#: templates/my_series.html:162
+msgid "Sort By"
+msgstr ""
+
+#: templates/my_series.html:164
+msgid "Newest Added"
+msgstr ""
+
+#: templates/my_series.html:165
+msgid "Highest Score First"
+msgstr ""
+
+#: templates/my_series.html:166
+msgid "Lowest Score First"
+msgstr ""
+
+#: templates/my_series.html:167
+msgid "Name (A-Z)"
+msgstr ""
+
+#: templates/my_series.html:173
+msgid "All Status"
+msgstr ""
+
+#: templates/my_series.html:176 templates/my_series.html:187
+msgid "Plan to Watch"
+msgstr ""
+
+#: templates/my_series.html:177 templates/my_series.html:188
+msgid "On Hold"
+msgstr ""
+
+#: templates/my_series.html:229
+msgid "Your Score:"
+msgstr ""
+
+#: templates/my_series.html:239
+msgid "You haven't added any series yet."
+msgstr ""
+
+#: templates/profile.html:8
+msgid "MySeries - Profile"
+msgstr ""
+
+#: templates/profile.html:68
+msgid "Change"
+msgstr ""
+
+#: templates/profile.html:73
+msgid "Member Since:"
+msgstr ""
+
+#: templates/profile.html:74
+msgid "Status:"
+msgstr ""
+
+#: templates/profile.html:74
+msgid "Online"
+msgstr ""
+
+#: templates/profile.html:79
+msgid "Browse Series"
+msgstr ""
+
+#: templates/profile.html:80
+msgid "Read News"
+msgstr ""
+
+#: templates/profile.html:86
+msgid "Log Out Account"
+msgstr ""
+
+#: templates/profile.html:93
+msgid "Select Profile Picture"
+msgstr ""
+
+#: templates/profile.html:99
+msgid "Upload From Computer"
+msgstr ""
+
+#: templates/profile.html:103
+msgid "or choose existing"
+msgstr ""
+
+#: templates/profile.html:112
+msgid "Close"
+msgstr ""
+
+#: templates/profile.html:138
+msgid "Choose a file first 🙂"
+msgstr ""
+
+#: templates/register.html:59 templates/register.html:81
+msgid "Create Account"
+msgstr ""
+
+#: templates/register.html:93
+msgid "Already have an account?"
+msgstr ""
+

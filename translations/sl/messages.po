@@ -1,0 +1,35 @@
+msgid "About Us"
+msgstr "O nas"
+
+msgid "Home"
+msgstr "Domov"
+
+msgid "Series"
+msgstr "Serije"
+
+msgid "My Series"
+msgstr "Moje serije"
+
+msgid "About us"
+msgstr "O nas"
+
+msgid "Register"
+msgstr "Registracija"
+
+msgid "Login"
+msgstr "Prijava"
+
+msgid "Copyright"
+msgstr "Avtorske pravice"
+
+msgid "Welcome to <strong>MySeries</strong> – your ultimate hub for discovering, tracking, and enjoying the latest and greatest TV shows and anime. We’re a small but passionate team of enthusiasts who believe that every series, from hidden gems to global hits, deserves to be seen."
+msgstr "Dobrodošli na <strong>MySeries</strong> – vašem osrednjem mestu za odkrivanje, spremljanje in uživanje v najnovejših ter najboljših televizijskih serijah in animejih. Smo majhna, a strastna ekipa navdušencev, ki verjame, da si vsaka serija, od skritih draguljev do svetovnih uspešnic, zasluži biti videna."
+
+msgid "Our mission is simple: to make your series-watching experience seamless and fun. Whether you’re hunting for the next binge-worthy anime or keeping up with popular dramas, we provide the tools and inspiration to explore your favorites."
+msgstr "Naše poslanstvo je preprosto: narediti izkušnjo gledanja serij enostavno in zabavno. Ne glede na to, ali iščete naslednji anime za maratonsko gledanje ali spremljate priljubljene drame, vam ponujamo orodja in navdih za raziskovanje vaših najljubših vsebin."
+
+msgid "At MySeries, we value quality, passion, and community. We constantly update our database with new releases, detailed series info, and high-quality cover images. Our goal is to create a place where series lovers can find everything they need, all in one spot."
+msgstr "Pri MySeries cenimo kakovost, strast in skupnost. Našo bazo nenehno posodabljamo z novimi izdajami, podrobnimi informacijami o serijah in kakovostnimi naslovnimi slikami. Naš cilj je ustvariti prostor, kjer ljubitelji serij najdejo vse, kar potrebujejo, na enem mestu."
+
+msgid "Thank you for being part of our journey. Sit back, explore, and let MySeries help you find your next favorite show!"
+msgstr "Hvala, ker ste del naše poti. Udobno se namestite, raziskujte in dovolite, da vam MySeries pomaga najti vašo naslednjo najljubšo serijo!"
