@@ -138,7 +138,7 @@ def series_info(series_id):
         conn.close()
         return "Series not found", 404
 
-    safe_name = series['name'].replace(" ", "").lower()
+    safe_name = series['name'].replace(" ", "")
     summary_file = os.path.join(app.root_path, 'static', 'SUMMARIES', f"{safe_name}.txt")
 
     series['Summary'] = "Summary not available."
@@ -184,7 +184,7 @@ def series_info_by_name(series_name):
     if not series:
         return "Series not found.", 404
 
-    safe_name = series['name'].replace(" ", "").lower()
+    safe_name = series['name'].replace(" ", "")
     summary_file = os.path.join(app.root_path, 'static', 'SUMMARIES', f"{safe_name}.txt")
 
     summary = "Summary not available."
