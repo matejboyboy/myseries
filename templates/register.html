@@ -22,7 +22,8 @@
                     <a href="/profile" class="nav-profile-bubble">
 
                         {% if session.get('profile_pic') %}
-                        <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}" class="nav-avatar">
+                        <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}"
+                            class="nav-avatar">
                         {% else %}
                         {{ session.username[0] | upper }}
                         {% endif %}
@@ -88,8 +89,9 @@
         </div>
 
         <!-- LINKS -->
-        <div class="filters-row" style="justify-content:center; margin-top:30px;">
+        <div class="filters-row" style="justify-content:center; margin-top:30px; background: none; box-shadow: none;">
             <a href="/" class="series-link">{{ _('Home') }}</a>
+            <span style="margin: 0 10px; color: var(--text-soft);">|</span>
             <a href="/login" class="series-link">{{ _('Already have an account?') }}</a>
         </div>
 
