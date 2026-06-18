@@ -11,7 +11,6 @@ from flask_babel import Babel, _
 app = Flask(__name__)
 app.secret_key = "some-long-random-string"
 
-babel = Babel(app)
 
 LANGUAGES = {
     'en': 'English',
@@ -28,11 +27,12 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def get_locale():
-    print(f"Current language: {session.get('language')}")
-    return session.get('language', 'en')
+    lang = session.get('language', 'en')
+    print(f"Current language: {lang}", flush=True) # flush=True forces it to show in Render logs
+    return lang
 
-babel.init_app(app, locale_selector=get_locale)
-
+# Initialize Babel exactly once, right here!
+babel = Babel(app, locale_selector=get_locale)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 DATABASE_URL = os.environ.get("DATABASE_URL")
