@@ -74,7 +74,11 @@
             <div class="profile_actions_grid">
                 
                 <button id="themeToggle" class="profile_btn" style="border:none; cursor:pointer; font-size:inherit; width: 100%;">
-                    {{ "☀️ Light" if current_theme == "dark" else "🌙 Dark" }}
+                    {% if current_theme == "dark" %}
+                        ☀️ {{ _('Light') }}
+                    {% else %}
+                        🌙 {{ _('Dark') }}
+                    {% endif %}
                 </button>
 
                 {% if session.get('language') == 'sl' %}
