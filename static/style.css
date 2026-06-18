@@ -1914,3 +1914,35 @@ select option {
     background: rgba(255, 90, 90, 0.2);
     color: #ff5a5a;
 }
+/* Better focus for login/register inputs */
+.form-card input.series-search:focus {
+    transform: translateY(-2px);
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.6), 0 0 15px rgba(var(--accent-rgb), 0.4);
+}
+
+/* Make Login/Register buttons feel premium */
+.form-card .primary-btn {
+    margin-top: 10px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 20px rgba(var(--accent-rgb), 0.3);
+}
+
+.form-card .primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(var(--accent-rgb), 0.5);
+    filter: brightness(1.1);
+}
+
+/* Clean up the links at the bottom */
+.filters-row .series-link {
+    color: var(--text-main);
+    font-weight: bold;
+    text-decoration: underline;
+    transition: 0.3s;
+}
+
+.filters-row .series-link:hover {
+    color: var(--accent);
+}
