@@ -11,20 +11,27 @@ from flask_babel import Babel, _
 app = Flask(__name__)
 app.secret_key = "some-long-random-string"
 
+babel = Babel(app)
+
+LANGUAGES = {
+    'en': 'English',
+    'sl': 'Slovenščina'
+}
+
 UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'PROFILE_PIC')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'
-app.config['BABEL_SUPPORTED_LOCALES'] = ['en', 'sl'] # English and Slovenian
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def get_locale():
-    # If the user selected a language, use it. Otherwise, default to English.
+    print(f"Current language: {session.get('language')}")
     return session.get('language', 'en')
 
-babel = Babel(app, locale_selector=get_locale)
+babel.init_app(app, locale_selector=get_locale)
 
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -492,13 +499,14 @@ def my_series():
     return render_template("my_series.html", user_series=user_series)
 
 
+from flask import redirect, request
+
 @app.route('/set_language/<lang>')
 def set_language(lang):
-    if lang in app.config['BABEL_SUPPORTED_LOCALES']:
+    if lang in ['en', 'sl']:
         session['language'] = lang
-        # You could also update the user_info database table here, 
-        # similar to how you handle the color_theme!
-    return redirect(request.referrer or url_for('home'))
+
+    return redirect(request.referrer or '/')
 
 
 
