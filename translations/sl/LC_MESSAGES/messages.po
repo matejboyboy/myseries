@@ -727,3 +727,9 @@ msgstr "Ustvari račun"
 #: templates/register.html:93
 msgid "Already have an account?"
 msgstr "Že imate račun?"
+
+msgid "Light"
+msgstr "Svetla"
+
+msgid "Dark"
+msgstr "Temna"
