@@ -1199,31 +1199,28 @@ body {
     font-size: 1.1rem;
     letter-spacing: 0.03em;
 
-    color: var(--text-main);
-    background: linear-gradient(145deg,
-        var(--ui-surface),
-        var(--ui-surface-2));
-
-    border: 1px solid rgba(var(--ui-surface-rgb), 0.08);
+    color: white;
+    background: var(--accent);
+    
+    border: none;
     border-radius: 0.9rem;
-
     cursor: pointer;
 
-    box-shadow:
-        0 12px 25px rgba(0, 0, 0, 0.4);
-
-    transition: all 0.3s ease;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    
+    /* The cubic-bezier adds a nice bouncy spring effect */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .primary-action-btn:hover {
-    background: linear-gradient(145deg,
-            var(--accent),
-            var(--accent-dark));
-
-    box-shadow:
-        0 18px 35px rgba(var(--accent-rgb), 0.45);
-
-    transform: translateY(-2px);
+    /* Brightens the button instead of relying on missing variables */
+    filter: brightness(1.15);
+    
+    /* Adds a glowing drop shadow matching your accent color */
+    box-shadow: 0 18px 35px rgba(var(--accent-rgb), 0.55);
+    
+    /* Springs up and scales slightly */
+    transform: translateY(-4px) scale(1.05);
 }
 
 .rating-select {
