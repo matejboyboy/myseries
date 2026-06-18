@@ -23,7 +23,8 @@
                         <a href="/profile" class="nav-profile-bubble">
 
                             {% if session.get('profile_pic') %}
-                            <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}" class="nav-avatar">
+                            <img src="{{ url_for('static', filename='PROFILE_PIC/' + session.profile_pic) }}"
+                                class="nav-avatar">
                             {% else %}
                             {{ session.username[0] | upper }}
                             {% endif %}
@@ -58,25 +59,21 @@
     <section>
 
         <!-- ====================== HOT NEW SERIES SLIDER ====================== -->
+        <!-- ====================== HOT NEW SERIES SLIDER ====================== -->
         <div>
             <h2 class="home_podnaslov">{{ _('Hot new series!') }}</h2>
             <div class="container">
                 <div class="slide_wrapper">
-
                     <div class="slider" id="hot-slider">
                         {% for s in hot_series %}
-                        <div class="slide">
-                            <a href="{{ url_for('series_info', series_id=s.id) }}">
-                                <img src="{{ url_for('static', filename='PICTURES/' ~ s.image) }}"
-                                    alt="{{ s.name }} {{ _('Cover') }}">
-
+                        <div class="slide" style="background-image: url(&quot;{{ url_for('static', filename='PICTURES/' + s.image) }}&quot;);">
+                            <a href="{{ url_for('series_info', series_id=s.id) }}" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                                <img src="{{ url_for('static', filename='PICTURES/' + s.image) }}" 
+                                     alt="{{ s.name }} {{ _('Cover') }}" 
+                                     style="max-height: 100%; width: auto; object-fit: contain;">
                                 <div class="slide-info">
                                     <h3>{{ s.name }}</h3>
-                                    <p>
-                                        {{ s.episodes or "?" }} {{ _('Episodes') }} •
-                                        {{ s.duration or "?" }} {{ _('min') }} •
-                                        {{ _(s.genre) if s.genre else _("Unknown") }}
-                                    </p>
+                                    <p>{{ s.episodes or "?" }} {{ _('Episodes') }} • {{ s.duration or "?" }} {{ _('min') }}</p>
                                 </div>
                             </a>
                         </div>
