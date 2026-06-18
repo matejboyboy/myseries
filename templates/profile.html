@@ -12,7 +12,6 @@
 
     <header>
         <nav class="home_nav">
-            <!-- TOP ROW -->
             <div class="nav_top_row">
                 <h1 class="home_naslov">MySeries</h1>
 
@@ -31,13 +30,10 @@
                     {% else %}
                     <a href="/login" class="nav-profile-bubble login-icon">?</a>
                     {% endif %}
-                    <button id="themeToggle" class="theme-toggle">
-                        {{ "☀️" if current_theme == "dark" else "🌙" }}
-                    </button>
-                </div>
+                    
+                    </div>
             </div>
 
-            <!-- BOTTOM ROW -->
             <div class="nav_bottom_row">
                 <a href="/">{{ _('Home') }}</a>
                 <a href="/series">{{ _('Series') }}</a>
@@ -76,13 +72,17 @@
             </div>
 
             <div class="profile_actions_grid">
-                <a href="/series" class="profile_btn">{{ _('Browse Series') }}</a>
-                <a href="/news" class="profile_btn">{{ _('Read News') }}</a>
+                
+                <button id="themeToggle" class="profile_btn" style="border:none; cursor:pointer; font-size:inherit; width: 100%;">
+                    {{ "☀️ Light" if current_theme == "dark" else "🌙 Dark" }}
+                </button>
+
                 {% if session.get('language') == 'sl' %}
-                    <a href="/set_language/en" class="profile_btn">🇬🇧 English</a>
+                    <a href="/set_language/en" class="profile_btn">English</a>
                 {% else %}
-                    <a href="/set_language/sl" class="profile_btn">🇸🇮 Slovenščina</a>
+                    <a href="/set_language/sl" class="profile_btn">Slovenščina</a>
                 {% endif %}
+
                 <a href="/logout" class="profile_btn btn_danger">{{ _('Log Out Account') }}</a>
             </div>
         </section>
@@ -92,7 +92,6 @@
         <div class="modal_content">
             <h3>{{ _('Select Profile Picture') }}</h3>
 
-            <!-- Upload Section -->
             <div class="upload_section">
                 <input type="file" id="fileInput" accept="image/*">
                 <button onclick="uploadPicture()" class="primary-btn">
